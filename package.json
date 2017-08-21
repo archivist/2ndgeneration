@@ -14,7 +14,7 @@
     "moment": "^2.17.1",
     "multer": "^1.3.0",
     "plyr": "^2.0.11",
-    "substance": "substance/substance#d0f842bdf54ee982394fab2a93e0aa40fbc78b93",
+    "substance": "substance/substance#f975ffe9a724aa0a31d846fceb741d3171845290",
     "ws": "^1.1.1"
   },
   "devDependencies": {
