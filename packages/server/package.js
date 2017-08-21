@@ -7,6 +7,7 @@ let IndexerPackage = require('../indexer/package')
 let ResourceServerPackage = require('./resource/package')
 let ConverterServerPackage = require('./converter/package')
 let DocumentServerPackage = require('./document/package')
+let ArchivistSubConfigurator = require('archivist').ArchivistSubConfigurator
 let AuthServerPackage = require('archivist').AuthServerPackage
 let CollabServerPackage = require('archivist').CollabServerPackage
 let UserServerPackage = require('archivist').UserServerPackage
@@ -14,10 +15,11 @@ let InspectorPackage = require('archivist').InspectorPackage
 
 let db = new Database()
 
-let InterviewPackage = require('../../dist/2ndg.cjs').InterviewPackage
+let InterviewPackage = require('../../dist/sgn.cjs').InterviewPackage
+let SubjectsPackage = require('../../dist/sgn.cjs').SubjectsPackage
 
 module.exports = {
-  name: 'ost-server',
+  name: 'sgn-server',
   configure: function(config) {
     config.setAppConfig(ServerConfig)
     config.setDBConnection(db)
@@ -31,5 +33,8 @@ module.exports = {
     config.import(ResourceServerPackage)
     config.import(UserServerPackage)
     config.import(ConverterServerPackage)
+
+    // Subjects subconfigurator
+    config.addConfigurator('archivist-subjects', new ArchivistSubConfigurator().import(SubjectsPackage))
   }
 }

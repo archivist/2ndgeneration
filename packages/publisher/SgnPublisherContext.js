@@ -3,7 +3,7 @@
 
 import { PublisherContext } from 'archivist'
 
-class SecondPublisherContext extends PublisherContext {
+class SgnPublisherContext extends PublisherContext {
   
   editSubject(node) {
     let mode = 'edit'
@@ -17,6 +17,13 @@ class SecondPublisherContext extends PublisherContext {
     console.log('Edit container resource', node.id, ',', mode, 'mode')
   }
 
+  resetSubjectsList() {
+    let context = 'subjects'
+    if(this.refs[context]) {
+      this.refs[context].setSelected()
+    }
+  }
+
 }
 
-export default SecondPublisherContext
+export default SgnPublisherContext

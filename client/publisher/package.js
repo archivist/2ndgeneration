@@ -1,8 +1,9 @@
-import { ProseArticle } from 'substance'
+import { ProseEditorPackage } from 'substance'
 import { ArchivistPackage, ArchivistSubConfigurator, CommentsPackage, DocumentsPackage, IndentationPackage, MetadataEditorPackage, ResourcesPackage, TimecodeAnnotatorPackage, UsersPackage, WhitespacePackage } from 'archivist'
 import InterviewPackage from '../../packages/interview/package'
 import FormsPackage from '../../packages/forms/package'
 import CommentaryManagerPackage from '../../packages/commentary-manager/package'
+import PersonManagerPackage from '../../packages/person-manager/package'
 import PublisherPackage from '../../packages/publisher/package'
 import SubjectManagerPackage from '../../packages/subject-manager/package'
 import SubjectsContextPackage from '../../packages/subjects-editor-context/package'
@@ -13,8 +14,16 @@ import ResourceClient from './ResourceClient'
 
 // Entities definitions
 import Commentary from '../../packages/commentary/Commentary'
+import Person from '../../packages/person/Person'
 import Subject from '../../packages/subjects/Subject'
 import Subjects from '../../packages/subjects/package'
+
+// Website entities and managers
+import Respondent from '../../packages/respondent/Respondent'
+import RespondentPackage from '../../packages/respondent/package'
+
+
+const { ProseArticle } = ProseEditorPackage
 
 let appConfig = 'ARCHIVISTCONFIG'
 appConfig = JSON.parse(appConfig)
@@ -23,12 +32,17 @@ export default {
   name: 'archivist-publisher',
   configure: function(config) {
     // Use the default Archivist package
+    config.setDefaultLanguage(appConfig.defaultLanguage)
     config.import(ArchivistPackage)
     config.import(DocumentsPackage)
     // Override Archivist form package 
     config.import(FormsPackage)
     // Manage commentary entity type
     config.import(CommentaryManagerPackage)
+    // Manage person entity type
+    config.import(PersonManagerPackage)
+    // Manage respondents
+    config.import(RespondentPackage)
     // Manage subjects
     config.import(SubjectManagerPackage)
     // Manage users
@@ -48,6 +62,7 @@ export default {
     EditorConfigurator.setContextMapping({
       'subject': 'subjects',
       'commentary': 'resources',
+      'person': 'resources',
       'comment': 'comments'
     })
     EditorConfigurator.setDefaultLanguage(appConfig.defaultLanguage)
@@ -57,10 +72,14 @@ export default {
     let EntitiesConfigurator = new ArchivistSubConfigurator()
     EntitiesConfigurator.defineSchema({
       name: 'archivist-entities',
-      ArticleClass: ProseArticle
+      version: '1.0.0',
+      DocumentClass: ProseArticle
     })
     EntitiesConfigurator.addNode(Commentary)
+    EntitiesConfigurator.addNode(Person)
+    EntitiesConfigurator.addNode(Respondent)
     EntitiesConfigurator.addNode(Subject)
+    EntitiesConfigurator.setDefaultLanguage(appConfig.defaultLanguage)
     config.addConfigurator('archivist-entities', EntitiesConfigurator)
 
     // Subjects subconfigurator
@@ -89,11 +108,12 @@ export default {
     config.setResourceClient(ResourceClient)
 
     config.setMenuItems([
-      {icon: 'fa-file-text', label: 'Documents', action: 'archive'},
-      {icon: 'fa-tags', label: 'Subjects', action: 'subjects'},
-      {icon: 'fa-users', label: 'Persons', action: 'persons'},
-      {icon: 'fa-comments', label: 'Commentary', action: 'commentaries'},
-      {icon: 'fa-id-badge', label: 'Users', action: 'users'}
+      {icon: 'fa-file-text', label: 'documents', action: 'archive'},
+      {icon: 'fa-tags', label: 'subjects', action: 'subjects'},
+      {icon: 'fa-users', label: 'persons', action: 'persons'},
+      {icon: 'fa-comments', label: 'commentary', action: 'commentaries'},
+      {icon: 'fa-user-circle-o', label: 'respondents', action: 'respondents'},
+      {icon: 'fa-id-badge', label: 'users', action: 'users'}
     ])
 
     config.setDefaultResourceTypes(['commentary'])

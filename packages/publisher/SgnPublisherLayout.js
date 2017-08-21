@@ -1,13 +1,14 @@
-import { CollabSession, JSONConverter, series, substanceGlobals } from 'substance'
-import { PublisherLayout } from 'archivist'
-import SecondPublisher from './SecondPublisher'
+import { async, JSONConverter, substanceGlobals } from 'substance'
+import { PublisherLayout, PublisherSession } from 'archivist'
+import SgnPublisher from './SgnPublisher'
 
+const {series} = async
 let converter = new JSONConverter()
 
-class SecondPublisherLayout extends PublisherLayout {
+class SgnPublisherLayout extends PublisherLayout {
 
   _getEditorClass() {
-    return SecondPublisher
+    return SgnPublisher
   }
 
   /*
@@ -24,10 +25,10 @@ class SecondPublisherLayout extends PublisherLayout {
         return
       }
 
-      let document = configurator.createArticle()
+      let document = configurator.createDocument()
       let doc = converter.importDocument(document, docRecord.data)
 
-      let session = new CollabSession(doc, {
+      let session = new PublisherSession(doc, {
         configurator: configurator,
         documentId: documentId,
         version: docRecord.version,
@@ -45,7 +46,8 @@ class SecondPublisherLayout extends PublisherLayout {
 
       series([
         this._loadResources(documentId, session),
-        this._loadSubjects(session)
+        this._loadSubjects(session),
+        this._loadCollaborators(documentId, session)
       ], () => {
         this.setState({
           session: session
@@ -80,4 +82,4 @@ class SecondPublisherLayout extends PublisherLayout {
 
 }
 
-export default SecondPublisherLayout
+export default SgnPublisherLayout

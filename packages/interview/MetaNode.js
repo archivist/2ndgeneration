@@ -8,30 +8,33 @@ class MetaNode extends DocumentNode {}
 
 MetaNode.define({
   type: 'meta',
-  title: { type: 'string', default: 'Untitled Interview', field: { editor: "text", description: "Enter interview title", group: 'Person details'}},
-  short_summary: { type: 'string', default: '', field: { editor: "multitext", description: "Enter short summary", collapse: 'Russian', group: 'Short summary'}},
-  abstract: { type: 'string', default: '', field: { editor: "multitext", description: "Enter abstract", collapse: 'Russian', group: 'Abstract'}},
+  short_summary: { type: 'string', default: '', field: { editor: "multitext", description: "short-summary-description", collapse: 'russian', group: 'short-summary'}},
+  abstract: { type: 'string', default: '', field: { editor: "multitext", description: "abstract-description", collapse: 'russian', group: 'abstract'}},
   
   // Interviewee data
-  interviewee: { type: 'string', default: '', field: { editor: "text", description: "Person name", group: 'Person details'}},
-  interviewee_bio: { type: 'string', default: '', field: { editor: "multitext", description: "Enter person biography", collapse: 'Biography', group: 'Person details'}},
-  interviewee_place_of_birth: { type: 'string', default: '', field: { editor: "text", description: "Person place of birth", group: 'Person details'}},
-  interviewee_year_of_birth: { type: 'string', default: '', field: { editor: "input", dataType: "number", description: "Person year of birth", group: 'Person details'}},
-  interviewee_photo: { type: 'string', default: '', field: { editor: "text", description: "Path to photo file", group: 'Person details'}},
+  title: { type: 'string', default: 'Безымянное интервью', field: { editor: "text", description: "title-description", group: 'person-details'}},
+  interviewee: { type: 'string', default: '', field: { editor: "text", description: "interviewee-description", group: 'person-details'}},
+  interviewee_bio: { type: 'string', default: '', field: { editor: "multitext", description: "bio-description", collapse: 'biography', group: 'person-details'}},
+  interviewee_place_of_birth: { type: 'string', default: '', field: { editor: "text", description: "place-of-birth-description", group: 'person-details'}},
+  interviewee_year_of_birth: { type: 'string', default: '', field: { editor: "input", dataType: "number", description: "year-of-birth-description", group: 'person-details'}},
+  interviewee_photo: { type: 'string', default: '', field: { editor: "text", description: "photo-file-description", group: 'person-details'}},
 
   // Project data
-  project: { type: 'string', default: '', field: { editor: "text", description: "Enter project name", group: 'Project details'}},
-  interview_location: { type: 'string', default: '', field: { editor: "text", description: "Interview location", group: 'Project details'}},
-  interview_date: { type: 'string', default: '', field: { editor: "input", dataType: "date", description: "Interview date (yyyy-MM-dd)", group: 'Project details'}},
-  conductor: { type: 'string', default: '', field: { editor: "text", description: "Inerviewer", group: 'Project details'}},
-  operator: { type: 'string', default: '', field: { editor: "text", description: "Operator", group: 'Project details'}},
-  interview_duration: { type: 'number', default: 0, field: { editor: "input", dataType: "number", description: "Duration (in minutes)", group: 'Project details'}},
-  media_id: { type: 'string', default: '', field: { editor: "text", description: "Media identifier", group: 'Project details'}},
+  project: { type: 'string', default: '', field: { editor: "text", description: "project-name-description", group: 'project-details'}},
+  interview_location: { type: 'string', default: '', field: { editor: "text", description: "interview-location-description", group: 'project-details'}},
+  interview_date: { type: 'string', default: '', field: { editor: "input", dataType: "date", description: "interview-date-description", group: 'project-details'}},
+  conductor: { type: 'string', default: '', field: { editor: "text", description: "conductor-description", group: 'project-details'}},
+  operator: { type: 'string', default: '', field: { editor: "text", description: "operator-description", group: 'project-details'}},
+  interview_duration: { type: 'number', default: 0, field: { editor: "input", dataType: "number", description: "duration-description", group: 'project-details'}},
+  media_id: { type: 'string', default: '', field: { editor: "text", description: "media-id-description", group: 'project-details'}},
 
   // Document data
-  published_on: { type: 'string', default: '', field: { editor: "input", dataType: "date", description: "Published date (yyyy-MM-dd)", group: 'Document details'}},
+  published_on: { type: 'string', default: '', field: { editor: "input", dataType: "date", description: "published-description", group: 'document-details'}},
   // states: transcripted, verified, finished, published
-  state: { type: 'string', default: '', field: { editor: "select", description: "Document state", options: ['transcripted', 'verified', 'finished', 'published'], group: 'Document details'}}
+  state: { type: 'string', default: '', field: { editor: "select", description: "document-state-description", options: ['transcripted', 'verified', 'finished', 'published'], group: 'document-details'}},
+
+  // Table of contents
+  toc: { type: ['chapter'], default: [] }
 })
 
 export default MetaNode

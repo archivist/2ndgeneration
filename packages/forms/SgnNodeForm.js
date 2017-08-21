@@ -1,16 +1,20 @@
 import { NodeForm } from 'archivist'
 import { each } from 'lodash-es'
-import OstForms from './OstForms'
+import SgnForms from './SgnForms'
 
 class OstNodeForm extends NodeForm {
   constructor(...args) {
     super(...args)
 
-    this.forms = new OstForms()
+    this.forms = new SgnForms({configurator: this.context.configurator})
   }
 
   didMount() {
     each(this.fields, function(field, id) {
+      if(field.config.placeholder) {
+        field.config.placeholder = this.getLabel(field.config.placeholder)
+      }
+      
       if(field.config.type === 'text') {
         this.forms.addTextField(id, this.refs[id].getNativeElement(), field.config)
         this.forms.setValue(id, field.value)
@@ -29,6 +33,9 @@ class OstNodeForm extends NodeForm {
         this.forms.setValue(id, field.value)
       } else if(field.config.type === 'toggle') {
         this.forms.addToggleField(id, this.refs[id].getNativeElement(), field.config)
+        this.forms.setValue(id, field.value)
+      } else if(field.config.type === 'image') {
+        this.forms.addImageField(id, this.refs[id].getNativeElement(), field.config)
         this.forms.setValue(id, field.value)
       }
     }.bind(this))

@@ -34,9 +34,9 @@ class Commentary extends DocumentNode {
 Commentary.type = 'commentary'
 
 Commentary.define({
-  name: { type: 'string', default: 'Unknown сommentary', field: { type: "text", dataType: "text", placeholder: "Enter title" }},
+  name: { type: 'string', default: 'Безымянный комментарий', field: { type: "text", dataType: "text", placeholder: "сommentary-name-placeholder" }},
   synonyms: {type: ['string'], default: []},
-  description: { type: 'string', default: '', field: { type: "prose", placeholder: "Enter сommentary" }}
+  description: { type: 'string', default: '', field: { type: "prose", placeholder: "сommentary-description-placeholder" }}
 })
 
 export default Commentary

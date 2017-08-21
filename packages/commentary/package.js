@@ -19,5 +19,13 @@ export default {
       en: 'Commentary',
       ru: 'Комментарий'
     })
+    config.addLabel('commentary-name-placeholder', {
+      en: 'Enter name',
+      ru: 'Введите заголовок'
+    })
+    config.addLabel('commentary-description-placeholder', {
+      en: 'Enter description',
+      ru: 'Введите комментарий'
+    })
   }
 }

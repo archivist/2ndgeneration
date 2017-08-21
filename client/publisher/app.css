@@ -1,5 +1,5 @@
 /* Publisher Component styles */
-@import '../../node_modules/substance/dist/substance.next.css';
+@import '../../node_modules/dropzone/dist/dropzone.css';
 @import './publisher.css';
 body { overflow: hidden; -webkit-font-smoothing: antialiased; }
 .sc-publisher { position: absolute; left: 0px; right: 0px; bottom: 0px; top: 0px; }

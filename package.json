@@ -1,16 +1,18 @@
 {
-  "name": "2ndgeneration",
+  "name": "sgn",
   "description": "",
-  "main": "dist/2ndg.cjs.js",
+  "main": "dist/sgn.cjs.js",
   "dependencies": {
-    "archivist": "archivist/archivist#960984b6073e0b825ac618a2d3b4bde4ddee65ab",
+    "archivist": "archivist/archivist#467164017c7b871825d55cc8ada727e07ff3bea3",
     "bluebird": "^3.4.7",
     "body-parser": "^1.15.2",
     "config": "^1.21.0",
+    "dropzone": "^5.1.1",
     "express": "^4.14.0",
     "lodash-es": "^4.17.4",
     "massive": "^2.5.0",
     "moment": "^2.17.1",
+    "multer": "^1.3.0",
     "plyr": "^2.0.11",
     "substance": "substance/substance#d0f842bdf54ee982394fab2a93e0aa40fbc78b93",
     "ws": "^1.1.1"
@@ -32,5 +34,5 @@
     "test": "gulp test"
   },
   "license": "GPL-3.0",
-  "version": "2.0.0-alpha.1"
+  "version": "1.0.0-alpha.1"
 }
