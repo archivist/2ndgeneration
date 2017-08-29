@@ -40,9 +40,7 @@ config/dev.json
 ecosystem.json
 
 # Conversion data
-ost-data
 
 dist
 dist/doc
-uploads
-tmp
+media
