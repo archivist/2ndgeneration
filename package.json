@@ -3,7 +3,7 @@
   "description": "",
   "main": "dist/sgn.cjs.js",
   "dependencies": {
-    "archivist": "archivist/archivist#467164017c7b871825d55cc8ada727e07ff3bea3",
+    "archivist": "archivist/archivist#322f3a4b94ebcaf6456896711b0ebcebed5d6897",
     "bluebird": "^3.4.7",
     "body-parser": "^1.15.2",
     "config": "^1.21.0",
