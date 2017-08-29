@@ -107,8 +107,8 @@ export default {
       ru: 'Укажите название документа'
     })
     config.addLabel('interviewee-description', {
-      en: 'Interviewee name',
-      ru: 'Имя респондента'
+      en: 'Select Interviewee',
+      ru: 'Выберите респондента из списка'
     })
     config.addLabel('bio-description', {
       en: 'Enter person biography',

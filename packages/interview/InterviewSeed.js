@@ -4,13 +4,13 @@ let seed = function(tx) {
   tx.create({
     id: 'meta',
     type: 'meta',
-    title: 'Untitled Interview'
+    title: 'Безымянное интервью'
   })
 
   tx.create({
     id: 'p1',
     type: 'paragraph',
-    content: 'Insert your interview here.'
+    content: 'Вставьте сюда расшифровку интервью.'
   })
   body.show('p1')
 }

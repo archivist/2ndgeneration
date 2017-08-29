@@ -13,7 +13,7 @@ MetaNode.define({
   
   // Interviewee data
   title: { type: 'string', default: 'Безымянное интервью', field: { editor: "text", description: "title-description", group: 'person-details'}},
-  interviewee: { type: 'string', default: '', field: { editor: "text", description: "interviewee-description", group: 'person-details'}},
+  interviewee: { type: 'string', default: '', field: { editor: "reference", entityType: ["respondent"], multi: false, description: "interviewee-description", group: 'person-details'}},
   interviewee_bio: { type: 'string', default: '', field: { editor: "multitext", description: "bio-description", collapse: 'biography', group: 'person-details'}},
   interviewee_place_of_birth: { type: 'string', default: '', field: { editor: "text", description: "place-of-birth-description", group: 'person-details'}},
   interviewee_year_of_birth: { type: 'string', default: '', field: { editor: "input", dataType: "number", description: "year-of-birth-description", group: 'person-details'}},
