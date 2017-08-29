@@ -12,6 +12,10 @@ let ArgTypes = require(massivePath + '/../lib/arg_types')
 let Where = require(massivePath + '/../lib/where')
 
 class ResourceEngine extends ArchivistResourceEngine {
+  constructor(config) {
+    super(config)
+    this.fileStore = config.fileStore
+  }
 
   getResourcesTree(entityType) {
     let query = `
@@ -204,6 +208,24 @@ class ResourceEngine extends ArchivistResourceEngine {
         resolve(stats)
       })
     })
+  }
+
+  removeEntity(entityId) {
+    let props = ['file', 'cover', 'photo']
+    return this.getEntity(entityId)
+      .then(entity => {
+        let data = entity.data
+        props.forEach(prop => {
+          if(data[prop]) {
+            this.fileStore.deleteFile(data[prop], err => {
+              if(err) console.error(err)
+            })
+          }
+        })
+      })
+      .then(() => {
+        return this.entityStore.deleteEntity(entityId)
+      })
   }
 }
 

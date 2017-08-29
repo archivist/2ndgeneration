@@ -7,6 +7,7 @@ let IndexerPackage = require('../indexer/package')
 let ResourceServerPackage = require('./resource/package')
 let ConverterServerPackage = require('./converter/package')
 let DocumentServerPackage = require('./document/package')
+let FileServerPackage = require('./file/package')
 let ArchivistSubConfigurator = require('archivist').ArchivistSubConfigurator
 let AuthServerPackage = require('archivist').AuthServerPackage
 let CollabServerPackage = require('archivist').CollabServerPackage
@@ -27,11 +28,12 @@ module.exports = {
     config.import(EnginePackage)
     config.import(IndexerPackage)
     config.import(InspectorPackage)
-    config.import(DocumentServerPackage)
     config.import(AuthServerPackage)
+    config.import(DocumentServerPackage)
     config.import(CollabServerPackage)
     config.import(ResourceServerPackage)
     config.import(UserServerPackage)
+    config.import(FileServerPackage)
     config.import(ConverterServerPackage)
 
     // Subjects subconfigurator

@@ -2,8 +2,6 @@ import { ProseArticle } from 'substance'
 import ScholarPackage from '../../packages/scholar/package'
 import HeaderPackage from '../../packages/header/package'
 import ExplorerPackage from '../../packages/explorer/package'
-import PersonIndexPackage from '../../packages/person-index/package'
-import MapPackage from '../../packages/map/package'
 import SubjectsPackage from '../../packages/subjects/package'
 import ReaderPackage from '../../packages/reader/package'
 import InterviewPackage from '../../packages/interview/package'
@@ -16,10 +14,7 @@ import DocumentClient from './DocumentClient'
 import ResourceClient from './ResourceClient'
 
 // Entities definitions
-import Definition from '../../packages/definition/Definition'
 import Person from '../../packages/person/Person'
-import Prison from '../../packages/prison/Prison'
-import Toponym from '../../packages/toponym/Toponym'
 
 let appConfig = 'ARCHIVISTCONFIG'
 appConfig = JSON.parse(appConfig)
@@ -30,8 +25,6 @@ export default {
     config.import(ScholarPackage)
     config.import(HeaderPackage)
     config.import(ExplorerPackage)
-    config.import(PersonIndexPackage)
-    config.import(MapPackage)
     config.setDefaultLanguage(appConfig.defaultLanguage)
 
 
@@ -59,10 +52,7 @@ export default {
       name: 'archivist-entities',
       ArticleClass: ProseArticle
     })
-    EntitiesConfigurator.addNode(Definition)
     EntitiesConfigurator.addNode(Person)
-    EntitiesConfigurator.addNode(Prison)
-    EntitiesConfigurator.addNode(Toponym)
     config.addConfigurator('archivist-entities', EntitiesConfigurator)
 
     // Subjects subconfigurator

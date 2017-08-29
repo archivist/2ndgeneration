@@ -103,7 +103,7 @@ class SubjectsPage extends Component {
     let search = $$('div').addClass('se-search').append(
       $$(Icon, {icon: 'fa-search'})
     )
-    let searchInput = $$(Input, {type: 'search', placeholder: 'Search...'})
+    let searchInput = $$(Input, {type: 'search', placeholder: this.getLabel('search-placeholder')})
       .ref('searchInput')
 
     if(this.isSearchEventSupported()) {
@@ -129,8 +129,8 @@ class SubjectsPage extends Component {
 
     let toolbox = $$(Toolbox, {
       actions: {
-        'toggleDescription': 'Toggle Description',
-        'newSubject': '+ Add subject'
+        'toggleDescription': this.getLabel('toggle-description'),
+        'newSubject': this.getLabel('add-subject')
       },
       content: filters
     })
@@ -216,7 +216,12 @@ class SubjectsPage extends Component {
     const Grid = this.getComponent('grid')
     
     let items = this.state.items
-    let edited = ['Updated', moment(node.edited).fromNow(), 'by', node.updatedBy].join(' ')
+    let updatedFromNow = moment(node.edited).fromNow()
+    let updatedDateTime = moment(node.edited).format('DD.MM.YYYY HH:mm')
+    let edited = this.getLabel('updated-info')
+      .replace('fromnow', updatedFromNow)
+      .replace('datetime', updatedDateTime)
+      .replace('username', node.updatedBy)
     let isHighlighted = node.selected
     let isExpanded = node.expanded || items.hasSelectedChildren(node.id)
     let childNodes = items.getChildren(node.id)
@@ -241,14 +246,14 @@ class SubjectsPage extends Component {
     title.append($$('span').addClass('se-tree-node-name').append(node.name))
 
     let additionalActions = [
-      {label: 'Edit', action: this._editItem.bind(this, node.id)},
-      {label: 'Documents', action: this._loadReferences.bind(this, node.id)}
+      {label: this.getLabel('edit-action'), action: this._editItem.bind(this, node.id)},
+      {label: this.getLabel('show-documents-action'), action: this._loadReferences.bind(this, node.id)}
     ]
 
     if(hideExpand) {
       additionalActions.push(
-        {label: 'Delete', action: this._removeItem.bind(this, node.id)},
-        {label: 'Merge', action: this._merge.bind(this, node.id)}
+        {label: this.getLabel('delete-action'), action: this._removeItem.bind(this, node.id)},
+        {label: this.getLabel('merge-action'), action: this._merge.bind(this, node.id)}
       )
     }
 
@@ -259,7 +264,7 @@ class SubjectsPage extends Component {
     let el = $$('div').addClass('se-row se-tree-node').append(
       title,
       $$(Grid.Cell, {columns: 3}).append(edited),
-      $$(Grid.Cell, {columns: 2}).append(node.count ? node.count + ' documents' : '0 documents'),
+      $$(Grid.Cell, {columns: 2}).append(node.count ? this.getLabel('document-counter').replace('count', node.count) : this.getLabel('document-counter').replace('count', 0)),
       $$(Grid.Cell, {columns: 1}).addClass('se-additional').append(
         this.renderAdditionalMenu($$, additionalActions)
       ).on('click', function(e) {
@@ -471,14 +476,14 @@ class SubjectsPage extends Component {
     let resourceClient = this.context.resourceClient
     let items = this.state.items
     let entityData = {
-      name: 'New subject',
+      name: this.getLabel('unknown-subject'),
       synonyms: [],
       description: '',
       entityType: 'subject',
       userId: user.userId,
       updatedBy: user.userId,
       data: {
-        name: 'New subject',
+        name: this.getLabel('unknown-subject'),
         workname: '',
         parent: 'root',
         position: Object.keys(items.getRoots()).length,

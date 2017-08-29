@@ -12,5 +12,17 @@ export default {
       en: '+ Add Respondent',
       ru: '+ Добавить респондента'
     })
+    config.addLabel('respondent-register-header', {
+      en: 'Respondent Archive',
+      ru: 'Опись архива'
+    })
+    config.addLabel('register-no-results', {
+      en: 'No files added',
+      ru: 'Нет файлов'
+    })
+    config.addLabel('register-no-results-description', {
+      en: 'Sorry, no files added yet',
+      ru: 'Для данного респондента не загружен ни один файл'
+    })
   }
 }

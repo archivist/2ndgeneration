@@ -7,3 +7,8 @@ body { overflow: hidden; -webkit-font-smoothing: antialiased; }
 .sc-welcome {
   background-image: -webkit-gradient(linear, left top, right top, from(rgba(255, 152, 0, 0.3)), to(rgba(139, 195, 74, 0.3))), url('./assets/entrance.jpg')!important;
 }
+
+.dropzone {
+  text-align: center;
+  border-style: dashed;
+}

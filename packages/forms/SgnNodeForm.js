@@ -6,7 +6,7 @@ class OstNodeForm extends NodeForm {
   constructor(...args) {
     super(...args)
 
-    this.forms = new SgnForms({configurator: this.context.configurator})
+    this.forms = new SgnForms({configurator: this.context.configurator, context: this.context})
   }
 
   didMount() {
@@ -36,6 +36,9 @@ class OstNodeForm extends NodeForm {
         this.forms.setValue(id, field.value)
       } else if(field.config.type === 'image') {
         this.forms.addImageField(id, this.refs[id].getNativeElement(), field.config)
+        this.forms.setValue(id, field.value)
+      } else if(field.config.type === 'reference') {
+        this.forms.addReferenceField(id, this.refs[id].getNativeElement(), field.config)
         this.forms.setValue(id, field.value)
       }
     }.bind(this))

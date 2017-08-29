@@ -1,5 +1,8 @@
+let fs = require('fs')
 let multer = require('multer')
 let uuid = require('substance').uuid
+
+const destination = './media'
 
 /*
   Implements File Store API.
@@ -10,7 +13,7 @@ class FileStore {
     
     this.storage = multer.diskStorage({
       destination: (req, file, cb) => {
-        cb(null, config.destination)
+        cb(null, config.destination || destination)
       },
       filename: (req, file, cb) => {
         let extension = file.originalname.split('.').pop()
@@ -34,6 +37,17 @@ class FileStore {
   */
   getFileName(req) {
     return req.file.filename
+  }
+
+  deleteFile(fileName, cb) {
+    let path = destination + '/' + fileName
+    let thumbPath = destination + '/s200/' + fileName
+    return fs.unlink(path, err => {
+      fs.exists(thumbPath, (exists) => { 
+        if (exists) return fs.unlink(thumbPath, cb)
+        return cb(err)
+      })
+    })
   }
 }
 

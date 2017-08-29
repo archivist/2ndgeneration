@@ -21,7 +21,12 @@ import Subjects from '../../packages/subjects/package'
 // Website entities and managers
 import Respondent from '../../packages/respondent/Respondent'
 import RespondentPackage from '../../packages/respondent/package'
-
+import Story from '../../packages/story/Story'
+import StoriesPackage from '../../packages/story/package'
+import Collection from '../../packages/collection/Collection'
+import CollectionPackage from '../../packages/collection/package'
+import File from '../../packages/register/File'
+import RegisterPackage from '../../packages/register/package'
 
 const { ProseArticle } = ProseEditorPackage
 
@@ -43,6 +48,12 @@ export default {
     config.import(PersonManagerPackage)
     // Manage respondents
     config.import(RespondentPackage)
+    // Manage collections
+    config.import(CollectionPackage)
+    // Manage files
+    config.import(RegisterPackage)
+    // Manage stories
+    config.import(StoriesPackage)
     // Manage subjects
     config.import(SubjectManagerPackage)
     // Manage users
@@ -76,8 +87,11 @@ export default {
       DocumentClass: ProseArticle
     })
     EntitiesConfigurator.addNode(Commentary)
+    EntitiesConfigurator.addNode(File)
     EntitiesConfigurator.addNode(Person)
     EntitiesConfigurator.addNode(Respondent)
+    EntitiesConfigurator.addNode(Collection)
+    EntitiesConfigurator.addNode(Story)
     EntitiesConfigurator.addNode(Subject)
     EntitiesConfigurator.setDefaultLanguage(appConfig.defaultLanguage)
     config.addConfigurator('archivist-entities', EntitiesConfigurator)
@@ -101,7 +115,7 @@ export default {
     config.setDocumentServerUrl(appConfig.protocol + '://'+appConfig.host+':'+appConfig.port+'/api/documents/')
     config.setDocumentClient(DocumentClient)
     // Define File Client
-    config.setFileServerUrl(appConfig.protocol + '://'+appConfig.host+':'+appConfig.port+'/api/files/')
+    config.setFileServerUrl(appConfig.protocol + '://'+appConfig.host+':'+appConfig.port+'/api/media/')
     config.setFileClient(FileClient)
     // Define Resource Client
     config.setResourceServerUrl(appConfig.protocol + '://'+appConfig.host+':'+appConfig.port+'/api/entities/')
@@ -113,6 +127,9 @@ export default {
       {icon: 'fa-users', label: 'persons', action: 'persons'},
       {icon: 'fa-comments', label: 'commentary', action: 'commentaries'},
       {icon: 'fa-user-circle-o', label: 'respondents', action: 'respondents'},
+      {icon: 'fa-file-video-o', label: 'stories', action: 'stories'},
+      {icon: 'fa-files-o', label: 'register', action: 'register'},
+      {icon: 'fa-inbox', label: 'collections', action: 'collections'},
       {icon: 'fa-id-badge', label: 'users', action: 'users'}
     ])
 

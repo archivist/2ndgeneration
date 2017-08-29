@@ -34,6 +34,7 @@ configurator.setDefaultLanguage('russian');
 app.use('/libs', express.static(path.join(__dirname, '/dist/libs')));
 if(config.publisherEndpoint) app.use(config.publisherEndpoint, express.static(path.join(__dirname, '/dist/publisher')));
 if(config.scholarEndpoint) app.use(config.scholarEndpoint, express.static(path.join(__dirname, '/dist/scholar')));
+if(config.mediaEndpoint) app.use('/media', express.static(path.join(__dirname, config.mediaEndpoint)));
 
 /*
   Handle other paths

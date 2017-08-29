@@ -32,12 +32,14 @@ class Subject extends DocumentNode {
 Subject.type = 'subject'
 
 Subject.define({
-  name: { type: 'string', default: '', field: { type: "text", dataType: "text", placeholder: "Enter subject name" }},
+  name: { type: 'string', default: '', field: { type: "text", dataType: "text", placeholder: "subject-name-placeholder" }},
   workname: { type: 'string', default: '' },
   parent: { type: 'id', optional: true },
   position: { type: 'number', default: 0 },
-  description: { type: 'string', default: '', field: { type: "prose", placeholder: "Enter subject description" }},
+  description: { type: 'string', default: '', field: { type: "prose", placeholder: "subject-description-placeholder" }},
   count: { type: 'number', default: 0 },
+  edited: { type: 'string', default: '' },
+  updatedBy: { type: 'string', default: '' },
   active: { type: 'boolean', default: false },
   expanded: { type: 'boolean', default: false }
 })

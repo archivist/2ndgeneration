@@ -28,6 +28,8 @@ class SubjectsImporter extends HTMLImporter {
           workname: subject.data.workname,
           position: subject.data.position,
           count: parseInt(subject.count, 10),
+          edited: subject.edited,
+          updatedBy: subject.updatedBy,
           description: subject.data.description,
           parent: subject.data.parent || 'root'
         })

@@ -11,5 +11,25 @@ export default {
       en: 'Subjects',
       ru: 'Темы'
     })
+    config.addLabel('add-subject', {
+      en: '+ Add subject',
+      ru: '+ Добавить тему'
+    })
+    config.addLabel('toggle-description', {
+      en: 'Toggle Description',
+      ru: 'Показывать описание'
+    })
+    config.addLabel('edit-action', {
+      en: 'Edit',
+      ru: 'Редактировать'
+    })
+    config.addLabel('show-documents-action', {
+      en: 'Documents',
+      ru: 'Документы'
+    })
+    config.addLabel('unknown-subject', {
+      en: 'Unknown Subject',
+      ru: 'Безымянная тема'
+    })
   }
 }

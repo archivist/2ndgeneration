@@ -1,9 +1,18 @@
 import { SplitPane } from 'substance'
 import { AbstractEntityPage } from 'archivist'
 import { findIndex } from 'lodash-es'
-import RespondentRegister from './RespondentRegister'
+import Uploader from './Uploader'
 
-class RespondentsPage extends AbstractEntityPage {
+class RegisterPage extends AbstractEntityPage {
+  constructor(...args) {
+    super(...args)
+
+    this.handleActions({
+      'uploadFiles': this._uploadFiles,
+      'closeUploader': this._closeUploader
+    })
+  }
+
   render($$) {
     const Modal = this.getComponent('modal')
 
@@ -21,14 +30,13 @@ class RespondentsPage extends AbstractEntityPage {
       main.append(
         $$(Modal, {
           width: 'medium'
-        }).addClass('se-respondent-editor').append(
-          $$(EntityEditor, {entityId: this.props.entityId}),
-          $$(RespondentRegister, {entityId: this.props.entityId})
+        }).append(
+          $$(EntityEditor, {entityId: this.props.entityId})
         ).ref('modal')
       )
     }
 
-    if(this.state.entityId && this.state.mode) {
+    if(this.state.entityId && this.state.mode && this.state.mode !== 'upload') {
       let ResourceOperator = this.getComponent('resource-operator')
       let index = findIndex(items, (i) => { return i.entityId === this.state.entityId })
       main.append(
@@ -36,6 +44,16 @@ class RespondentsPage extends AbstractEntityPage {
           width: 'medium'
         }).append(
           $$(ResourceOperator, {entityId: this.state.entityId, item: items[index], mode: this.state.mode})
+        ).ref('modal')
+      )
+    }
+
+    if(this.state.mode === 'upload') {
+      main.append(
+        $$(Modal, {
+          width: 'medium'
+        }).append(
+          $$(Uploader)     
         ).ref('modal')
       )
     }
@@ -57,9 +75,31 @@ class RespondentsPage extends AbstractEntityPage {
 
     return el
   }
+
+  renderToolbox($$) {
+    let Toolbox = this.getComponent('toolbox')
+    let filters = this.renderFilters($$)
+
+    let toolbox = $$(Toolbox, {
+      actions: {
+        'uploadFiles': this.getLabel('add-' + this.entityType)
+      },
+      content: filters
+    })
+
+    return toolbox
+  }
+
+  _uploadFiles() {
+    this.extendState({mode: 'upload'})
+  }
+
+  _closeUploader() {
+    this.extendState({mode: ''})
+  }
 }
 
-RespondentsPage.entityType = 'respondent'
-RespondentsPage.pageName = 'respondents'
+RegisterPage.entityType = 'file'
+RegisterPage.pageName = 'register'
 
-export default RespondentsPage
+export default RegisterPage
