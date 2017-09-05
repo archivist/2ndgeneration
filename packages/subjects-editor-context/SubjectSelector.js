@@ -61,7 +61,9 @@ class SubjectSelector extends Component {
     let subjects = []
     if(nodeId) {
       let node = doc.get(nodeId)
-      subjects = node.reference
+      if(node) {
+        subjects = node.reference
+      }
     }
     subjects.forEach(s => {
       subjectsTree.set([s, 'active'], true)
