@@ -16,7 +16,7 @@ MetaNode.define({
   interviewee: { type: 'string', default: '', field: { editor: "reference", entityType: ["respondent"], multi: false, description: "interviewee-description", group: 'person-details'}},
   interviewee_bio: { type: 'string', default: '', field: { editor: "multitext", description: "bio-description", collapse: 'biography', group: 'person-details'}},
   interviewee_place_of_birth: { type: 'string', default: '', field: { editor: "text", description: "place-of-birth-description", group: 'person-details'}},
-  interviewee_year_of_birth: { type: 'string', default: '', field: { editor: "input", dataType: "number", description: "year-of-birth-description", group: 'person-details'}},
+  interviewee_year_of_birth: { type: 'string', default: '', field: { editor: "input", dataType: "text", description: "year-of-birth-description", group: 'person-details'}},
   interviewee_photo: { type: 'string', default: '', field: { editor: "text", description: "photo-file-description", group: 'person-details'}},
 
   // Project data
