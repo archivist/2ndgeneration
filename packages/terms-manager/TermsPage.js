@@ -2,7 +2,7 @@ import { Component, FontAwesomeIcon as Icon, SplitPane, SubstanceError as Err } 
 import { concat, each, flattenDeep, isEmpty, sortBy, map, throttle} from 'lodash-es'
 import moment from 'moment'
 
-class SubjectsPage extends Component {
+class TermsPage extends Component {
   constructor(...args) {
     super(...args)
 
@@ -704,6 +704,6 @@ class SubjectsPage extends Component {
   }
 }
 
-SubjectsPage.pageName = 'subjects'
+TermsPage.pageName = 'terms'
 
-export default SubjectsPage
+export default TermsPage

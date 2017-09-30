@@ -1,22 +1,22 @@
-.sc-subjects-page .se-entity-layout {
+.sc-terms-page .se-entity-layout {
   display: flex;
   flex-flow: column nowrap;
 }
 
-.sc-subjects-page .se-cell.se-title {
+.sc-terms-page .se-cell.se-title {
   font-weight: bold;
 }
 
-.sc-subjects-page .se-document-reference .se-badge {
+.sc-terms-page .se-document-reference .se-badge {
   background: #fafafa;
   text-align: center;
 }
 
-.sc-subjects-page .se-document-reference:hover > .se-badge {
+.sc-terms-page .se-document-reference:hover > .se-badge {
   background: #EEEEEE;
 }
 
-.sc-subjects-page .se-row.se-highlighted .se-tree-node-name {
+.sc-terms-page .se-row.se-highlighted .se-tree-node-name {
   background: rgba(4, 239, 0, 0.2);
   padding: 5px;
   position: relative;
@@ -59,21 +59,21 @@
   padding-left: 260px!important;
 }
 
-.sc-subjects-page .se-collapse {
+.sc-terms-page .se-collapse {
   width: 15px;
   font-size: 15px;
   margin-left: -15px;
 }
 
-.sc-subjects-page .se-level-1 .se-collapse {
+.sc-terms-page .se-level-1 .se-collapse {
   margin-left: 0px;
 }
 
-.sc-subjects-page .se-tree-node-description {
+.sc-terms-page .se-tree-node-description {
   border-bottom: none;
 }
 
-.sc-subjects-page .sc-grid .se-description {
+.sc-terms-page .sc-grid .se-description {
   float: left;
   padding: 0px 10px 10px;
 }
@@ -121,6 +121,6 @@
   -webkit-user-drag: element;
 }
 
-.sc-subjects-page .se-entity-layout .sc-modal {
+.sc-terms-page .se-entity-layout .sc-modal {
   z-index: 99;
 }

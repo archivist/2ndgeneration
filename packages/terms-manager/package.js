@@ -1,9 +1,9 @@
-import SubjectsPage from './SubjectsPage'
+import TermsPage from './TermsPage'
 
 export default {
-  name: 'subject-manager',
+  name: 'term-manager',
   configure: function(config) {
-    config.addPage(SubjectsPage.pageName, SubjectsPage)
+    config.addPage(TermsPage.pageName, TermsPage)
     config.addIcon('collapsed', { 'fontawesome': 'fa-caret-right' })
     config.addIcon('expanded', { 'fontawesome': 'fa-caret-down' })
     config.addIcon('dnd', { 'fontawesome': 'fa-arrows' })
