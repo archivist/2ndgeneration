@@ -162,5 +162,21 @@ export default {
       en: 'Document state',
       ru: 'Статус документа'
     })
+    config.addLabel('meta-state-transcripted', {
+      en: 'Transcripted',
+      ru: 'Расшифровано'
+    })
+    config.addLabel('meta-state-verified', {
+      en: 'Verified',
+      ru: 'Выверено'
+    })
+    config.addLabel('meta-state-finished', {
+      en: 'Finished',
+      ru: 'Отредактировано'
+    })
+    config.addLabel('meta-state-published', {
+      en: 'Published',
+      ru: 'Опубликовано'
+    })
   }
 }
