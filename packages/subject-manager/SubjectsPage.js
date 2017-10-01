@@ -20,6 +20,10 @@ class SubjectsPage extends Component {
     })
   }
 
+  get pageName() {
+    return this.constructor.pageName
+  }
+
   getInitialState() {
     return {
       description: true,
@@ -120,8 +124,8 @@ class SubjectsPage extends Component {
   }
 
   renderHeader($$) {
-    let Header = this.getComponent(this.getLabel(this.pageName))
-    return $$(Header)
+    let Header = this.getComponent('header')
+    return $$(Header, {page: this.pageName})
   }
 
   renderToolbox($$) {

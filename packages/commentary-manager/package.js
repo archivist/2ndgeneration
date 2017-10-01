@@ -8,6 +8,10 @@ export default {
       en: 'Commentary',
       ru: 'Комментарии'
     })
+    config.addLabel('commentaries', {
+      en: 'Commentaries',
+      ru: 'Комментарии'
+    })
     config.addLabel('add-commentary', {
       en: '+ Add Commentary',
       ru: '+ Добавить комментарий'
