@@ -19,5 +19,21 @@ export default {
       en: 'Person',
       ru: 'Персоналия'
     })
+    config.addLabel('person-default-name', {
+      en: 'Unknown Person',
+      ru: 'Безымянная персоналия'
+    })
+    config.addLabel('person-name-placeholder', {
+      en: 'Enter name',
+      ru: 'Укажите имя'
+    })
+    config.addLabel('person-description-placeholder', {
+      en: 'Enter description',
+      ru: 'Введите описание'
+    })
+    config.addLabel('person-global-placeholder', {
+      en: 'Global person',
+      ru: 'Глобальная персоналия'
+    })
   }
 }

@@ -19,6 +19,10 @@ export default {
       en: 'Commentary',
       ru: 'Комментарий'
     })
+    config.addLabel('commentary-default-name', {
+      en: 'Unknown Commentary',
+      ru: 'Безымянный комментарий'
+    })
     config.addLabel('commentary-name-placeholder', {
       en: 'Enter name',
       ru: 'Введите заголовок'

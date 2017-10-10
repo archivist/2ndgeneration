@@ -14,13 +14,13 @@ export default {
       en: '+ Files',
       ru: '+ Добавить файлы'
     })
+    config.addLabel('file-default-name', {
+      en: 'Unknown File',
+      ru: 'Безымянный файл'
+    })
     config.addLabel('multi-upload-description', {
       en: 'Drag or Select Files to Upload',
       ru: 'Перетащите или выберите файлы для загрузки'
-    })
-    config.addLabel('default-file-name', {
-      en: 'Unknown File',
-      ru: 'Безымянный файл'
     })
   }
 }

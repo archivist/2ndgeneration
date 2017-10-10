@@ -481,14 +481,14 @@ class SubjectsPage extends Component {
     let resourceClient = this.context.resourceClient
     let items = this.state.items
     let entityData = {
-      name: this.getLabel('unknown-subject'),
+      name: this.getLabel('subject-default-name'),
       synonyms: [],
       description: '',
       entityType: 'subject',
       userId: user.userId,
       updatedBy: user.userId,
       data: {
-        name: this.getLabel('unknown-subject'),
+        name: this.getLabel('subject-default-name'),
         workname: '',
         parent: 'root',
         position: Object.keys(items.getRoots()).length,

@@ -12,5 +12,9 @@ export default {
       en: '+ Add Collection',
       ru: '+ Добавить коллекцию'
     })
+    config.addLabel('collection-default-name', {
+      en: 'Unknown Collection',
+      ru: 'Безымянная коллекция'
+    })
   }
 }

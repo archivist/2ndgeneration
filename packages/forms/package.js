@@ -6,6 +6,10 @@ export default {
     config.addComponent('form', SgnNodeForm, true)
 
     // Form translations
+    config.addLabel('person-default-name', {
+      en: 'Unknown Person',
+      ru: 'Безымянная персоналия'
+    })
     config.addLabel('person-name-placeholder', {
       en: 'Enter person\'s name',
       ru: 'Введите имя персоналии'
@@ -18,6 +22,10 @@ export default {
       en: 'Global person',
       ru: 'Глобальная персоналия'
     })
+    config.addLabel('commentary-default-name', {
+      en: 'Unknown Commentary',
+      ru: 'Безымянный комментарий'
+    })
     config.addLabel('сommentary-name-placeholder', {
       en: 'Enter comment title',
       ru: 'Заголовок комментария'
@@ -26,6 +34,10 @@ export default {
       en: 'Enter comment',
       ru: 'Введите комментарий'
     })
+    config.addLabel('subject-default-name', {
+      en: 'Unknown Subject',
+      ru: 'Безымянная тема'
+    })
     config.addLabel('subject-name-placeholder', {
       en: 'Enter subject name',
       ru: 'Введите название темы'
@@ -33,6 +45,10 @@ export default {
     config.addLabel('subject-description-placeholder', {
       en: 'Enter subject description',
       ru: 'Введите описание темы'
+    })
+    config.addLabel('respondent-default-name', {
+      en: 'Unknown Respondent',
+      ru: 'Безымянный респондент'
     })
     config.addLabel('respondent-name-placeholder', {
       en: 'Enter respondent name',
@@ -58,6 +74,10 @@ export default {
       en: 'Published',
       ru: 'Опубликовано'
     })
+    config.addLabel('story-default-name', {
+      en: 'Unknown Story',
+      ru: 'Безымянный сюжет'
+    })
     config.addLabel('story-name-placeholder', {
       en: 'Enter story title',
       ru: 'Название сюжета'
@@ -77,6 +97,10 @@ export default {
     config.addLabel('media-identifier-placeholder', {
       en: 'Enter media identifier',
       ru: 'Медиа идентификатор'
+    })
+    config.addLabel('file-default-name', {
+      en: 'Unknown File',
+      ru: 'Безымянный файл'
     })
     config.addLabel('file-title-placeholder', {
       en: 'Enter file title',
@@ -101,6 +125,10 @@ export default {
     config.addLabel('file-placeholder', {
       en: 'Upload file',
       ru: 'Выбирите или перетащите файл'
+    })
+    config.addLabel('collection-default-name', {
+      en: 'Unknown Collection',
+      ru: 'Безымянная коллекция'
     })
     config.addLabel('collection-name-placeholder', {
       en: 'Enter collection name',

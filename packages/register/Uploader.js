@@ -15,7 +15,7 @@ class Uploader extends Component {
 
     let authClient = this.context.authenticationClient
     let dzConfig = {
-      url: '/api/media', 
+      url: '/api/media',
       acceptedFiles: 'image/*,application/pdf',
       dictDefaultMessage: this.getLabel('multi-upload-description'),
       paramName: 'files',
@@ -101,7 +101,7 @@ class Uploader extends Component {
     let ext = fileName.split('.')[1]
     let entityData = {
       entityId: entityId,
-      name: this.getLabel('default-file-name'),
+      name: this.getLabel('file-default-name'),
       synonyms: [],
       description: '',
       entityType: 'file',

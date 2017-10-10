@@ -68,6 +68,10 @@ export default {
       en: 'Find and Replace',
       ru: 'Поиск и замена'
     })
+    config.addLabel('person-default-name', {
+      en: 'Unknown Person',
+      ru: 'Безымянная персоналия'
+    })
     config.addLabel('person-name-placeholder', {
       en: 'Enter person\'s name',
       ru: 'Введите имя персоналии'

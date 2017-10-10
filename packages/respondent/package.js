@@ -12,6 +12,10 @@ export default {
       en: '+ Add Respondent',
       ru: '+ Добавить респондента'
     })
+    config.addLabel('respondent-default-name', {
+      en: 'Unknown Respondent',
+      ru: 'Безымянный респондент'
+    })
     config.addLabel('respondent-register-header', {
       en: 'Respondent Archive',
       ru: 'Опись архива'

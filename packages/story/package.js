@@ -12,5 +12,9 @@ export default {
       en: '+ Add Story',
       ru: '+ Добавить сюжет'
     })
+    config.addLabel('story-default-name', {
+      en: 'Unknown Story',
+      ru: 'Безымянный сюжет'
+    })
   }
 }

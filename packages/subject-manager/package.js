@@ -27,7 +27,7 @@ export default {
       en: 'Documents',
       ru: 'Документы'
     })
-    config.addLabel('unknown-subject', {
+    config.addLabel('subject-default-name', {
       en: 'Unknown Subject',
       ru: 'Безымянная тема'
     })
