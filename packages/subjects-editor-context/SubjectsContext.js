@@ -8,10 +8,11 @@ class SubjectsContext extends Component {
     super(...args)
 
     this.handleActions({
-      'showList': this._showList
+      'showList': this._showList,
+      'showEditor': this._showEditor
     })
   }
-  
+
   didMount() {
     this.buildTree()
     if(this.props.topic) {
@@ -33,14 +34,14 @@ class SubjectsContext extends Component {
 
     if(mode === 'list') {
       return this.renderList($$)
-    } else if (mode === 'edit') {
+    } else if (mode === 'edit' || mode === 'create') {
       return this.renderSubjectSelector($$)
     }
   }
 
   renderSubjectSelector($$) {
     let el = $$('div').addClass('sc-subjects-panel')
-    
+
     el.append(
       $$(SubjectSelector, {configurator: this.props.configurator, node: this.props.item})
     )
@@ -110,7 +111,7 @@ class SubjectsContext extends Component {
       childrenEls = map(childNodes, function(сhildNode) {
         return this.renderChildren($$, сhildNode, level + 1)
       }.bind(this))
-    
+
       let el = $$('span').addClass('se-tree-node se-level-' + level)
       .attr("href", '#topic=' + node.id)
       .append(node.name)
@@ -138,6 +139,12 @@ class SubjectsContext extends Component {
   _showList() {
     this.send('resetBrackets', 'subject')
     this.send('switchContext', {mode: 'list'})
+    //this.extendState({selected: undefined})
+  }
+
+  _showEditor(id) {
+    this.send('resetBrackets', 'subject')
+    this.send('switchContext', {mode: 'edit', item: id})
     //this.extendState({selected: undefined})
   }
 }

@@ -46,7 +46,7 @@ class SgnPublisher extends Publisher {
       if(author) this._addCollaborator(author)
     }
 
-    // TODO: figure out why selection flags changed after comment update 
+    // TODO: figure out why selection flags changed after comment update
     if(selectionChanged && !this._isCommentChange(change)) {
 
       let doc = editorSession.getDocument()
@@ -140,9 +140,9 @@ class SgnPublisher extends Publisher {
     )
   }
 
-  _createSubjectReference(anno) {
+  _createSubjectReference() {
     let contextPanel = this.refs.contextPanel
-    contextPanel.editSubject(anno)
+    contextPanel.createSubject()
   }
 
   _showTopics(topics) {

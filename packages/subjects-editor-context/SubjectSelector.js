@@ -96,7 +96,7 @@ class SubjectSelector extends Component {
 
     let el = $$('div').addClass('se-tree-node').ref(node.id)
       .on('click', this._expandNode.bind(this, node.id))
-      
+
     if(isSelected) el.addClass('active')
 
     // level graphical nesting
@@ -147,7 +147,12 @@ class SubjectSelector extends Component {
     let subjects = this.state.subjects
     let currentValue = subjects.get([id, 'active'])
     subjects.set([id, 'active'], !currentValue)
-    this._setReference()
+    if(this.props.node) {
+      this._setReference()
+    } else {
+      this._createReference()
+    }
+
     this.extendState({
       subjects: subjects
     })
@@ -160,6 +165,26 @@ class SubjectSelector extends Component {
     editorSession.transaction((tx) => {
       tx.set([this.props.node, 'reference'], active)
     })
+  }
+
+  _createReference() {
+    let subjects = this.state.subjects
+    let editorSession = this.context.editorSession
+    let active = subjects.getActive()
+    let annoData = {
+      type: 'subject',
+      reference: active
+    }
+    let anno
+    editorSession.transaction((tx, args) => {
+      anno = tx.annotate(annoData)
+      return args
+    })
+    this.send('showEditor', anno.id)
+    // this.extendProps({
+    //   node: anno.id,
+    //   mode: 'edit'
+    // })
   }
 
   _goBack() {

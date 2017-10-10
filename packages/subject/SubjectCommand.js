@@ -44,16 +44,9 @@ class SubjectCommand extends ContainerAnnotationCommand {
     let annos = this._getAnnotationsForSelection(params)
     this._checkPrecondition(params, annos, this.canCreate)
     let editorSession = this._getEditorSession(params)
-    let annoData = this.getAnnotationData()
-    annoData.type = this.getAnnotationType()
-    let anno
-    editorSession.transaction((tx) => {
-      anno = tx.annotate(annoData)
-    })
-    editorSession.emit('createSubjectReference', anno)
+    editorSession.emit('createSubjectReference')
     return {
-      mode: 'create',
-      anno: anno
+      mode: 'create'
     }
   }
 }
