@@ -56,7 +56,10 @@ class Uploader extends Component {
     if(!this.state.files) {
       el.append(
         $$('div').addClass('se-upload-files dropzone')
-          .ref('files')
+          .ref('files'),
+        $$('div').addClass('se-close').append(
+          $$('i').addClass('fa fa-times')
+        ).on('click', this._closeUploader.bind(this))
       )
 
       return el
@@ -84,7 +87,7 @@ class Uploader extends Component {
     if(files.length > index + 1) {
       this.extendState({index: index + 1})
     } else {
-      this.send('closeUploader')
+      this._closeUploader()
     }
   }
 
@@ -120,6 +123,10 @@ class Uploader extends Component {
         return
       }
     })
+  }
+
+  _closeUploader() {
+    this.send('closeUploader')
   }
 }
 
