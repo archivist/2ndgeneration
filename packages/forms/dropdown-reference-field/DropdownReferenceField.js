@@ -1,6 +1,6 @@
 import { Component, FontAwesomeIcon as Icon } from 'substance'
 
-class ReferenceField extends Component {
+class DropdownReferenceField extends Component {
   constructor(...args) {
     super(...args)
     this.configurator = this.props.configurator
@@ -55,7 +55,7 @@ class ReferenceField extends Component {
     }
 
     if(config.placeholder) el.append($$('div').addClass('help').append(config.placeholder))
-    
+
     return el
   }
 
@@ -144,4 +144,4 @@ class ReferenceField extends Component {
 
 }
 
-export default ReferenceField
+export default DropdownReferenceField

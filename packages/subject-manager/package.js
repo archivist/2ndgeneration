@@ -15,6 +15,10 @@ export default {
       en: '+ Add subject',
       ru: '+ Добавить тему'
     })
+    config.addLabel('add-subject-action', {
+      en: 'Add Subject',
+      ru: 'Добавить тему'
+    })
     config.addLabel('toggle-description', {
       en: 'Toggle Description',
       ru: 'Показывать описание'

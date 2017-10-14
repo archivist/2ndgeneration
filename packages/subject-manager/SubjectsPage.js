@@ -252,6 +252,7 @@ class SubjectsPage extends Component {
 
     let additionalActions = [
       {label: this.getLabel('edit-action'), action: this._editItem.bind(this, node.id)},
+      {label: this.getLabel('add-subject-action'), action: this._newSubject.bind(this, node.id)},
       {label: this.getLabel('show-documents-action'), action: this._loadReferences.bind(this, node.id)}
     ]
 
@@ -475,7 +476,8 @@ class SubjectsPage extends Component {
   /*
     Create a new subject
   */
-  _newSubject() {
+  _newSubject(parentId) {
+    parentId = typeof parentId === 'string' || parentId instanceof String ? parentId : 'root'
     let authenticationClient = this.context.authenticationClient
     let user = authenticationClient.getUser()
     let resourceClient = this.context.resourceClient
@@ -490,7 +492,7 @@ class SubjectsPage extends Component {
       data: {
         name: this.getLabel('subject-default-name'),
         workname: '',
-        parent: 'root',
+        parent: parentId,
         position: Object.keys(items.getRoots()).length,
         description: ''
       }
@@ -514,8 +516,10 @@ class SubjectsPage extends Component {
         workname: entity.data.workname,
         position: entity.data.position,
         count: 0,
+        edited: entity.edited,
+        updatedBy: entity.updatedBy,
         description: entity.data.description,
-        parent: 'root'
+        parent: parentId
       })
 
       this.extendProps({

@@ -8,4 +8,6 @@
 @import '../../packages/subject/_index.css';
 @import '../../packages/subject-manager/_index.css';
 @import '../../packages/subjects-editor-context/_index.css';
+@import '../../packages/term-manager/_index.css';
 @import '../../packages/toc/_index.css';
+@import '../../packages/toponym/_index.css';

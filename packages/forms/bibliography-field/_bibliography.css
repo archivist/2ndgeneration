@@ -1,0 +1,57 @@
+.sc-field-bibliography {
+  position: relative;
+}
+
+.sc-field-bibliography .se-bibliography-header .se-label {
+  display: inline-block;
+  font-size: 14px;
+  line-height: 26px;
+}
+
+.sc-field-bibliography .se-bibliography-header .se-action {
+  position: absolute;
+  right: 0px;
+}
+
+.sc-field-bibliography .se-source-editor {
+  border: 1px solid #E0E4E4;
+  padding: 10px;
+  margin: 10px 0px;
+}
+
+.sc-field-bibliography .se-source-editor .se-source-selector {
+  display: inline-block;
+  max-width: 50%;
+  width: 50%;
+  font-size: 12px;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.sc-field-bibliography .se-source-editor .sc-input {
+  padding: 6px;
+  width: 10%;
+  margin: 0px 3px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 12px;
+}
+
+.sc-field-bibliography .se-action {
+  display: inline-block;
+  position: relative;
+  height: 25px;
+  text-align: center;
+  font-size: 10px;
+  line-height: 25px;
+  font-weight: 600;
+  border-radius: 3px;
+  border: 1px solid #E0E4E4;
+  padding-left: 7px;
+  padding-right: 7px;
+  cursor: pointer;
+}
+
+.sc-field-bibliography .se-action i {
+  margin-right: 4px;
+}

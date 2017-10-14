@@ -47,17 +47,17 @@ class ResourceClient {
   }
 
   /*
-    Read entities
-  */
-  getEntities(entitiyIds, cb) {
-    request('GET', '/api/entities/' + entityId, null, cb)
-  }
-
-  /*
     Update an entity
   */
   updateEntity(entityId, entityData, cb) {
     this.request('PUT', '/api/entities/' + entityId, entityData, cb)
+  }
+
+  /*
+    Update entities
+  */
+  updateEntities(entityData, cb) {
+    this.request('POST', '/api/entities/tree/update', entityData, cb)
   }
 
   /*

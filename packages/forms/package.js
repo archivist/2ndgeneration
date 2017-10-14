@@ -142,5 +142,49 @@ export default {
       en: 'Select related respondents',
       ru: 'Выбирите респондентов'
     })
+    config.addLabel('toponym-default-name', {
+      en: 'Unknown Toponym',
+      ru: 'Безымянный топоним'
+    })
+    config.addLabel('toponym-name-placeholder', {
+      en: 'Enter name',
+      ru: 'Введите заголовок'
+    })
+    config.addLabel('toponym-description-placeholder', {
+      en: 'Enter description',
+      ru: 'Введите топоним'
+    })
+    config.addLabel('toponym-synonyms-placeholder', {
+      en: 'Enter synonyms',
+      ru: 'Укажите синонимы'
+    })
+    config.addLabel('toponym-type-placeholder', {
+      en: 'Choose a type',
+      ru: 'Выберите тип'
+    })
+    config.addLabel('bibliography-editor-label', {
+      en: 'Biliography',
+      ru: 'Библиография'
+    })
+    config.addLabel('bibliography-add-source', {
+      en: 'Add Source',
+      ru: 'Добавить источник'
+    })
+    config.addLabel('bibliography-remove-source', {
+      en: 'Remove Source',
+      ru: 'Убрать источник'
+    })
+    config.addLabel('bibliography-source-placeholder', {
+      en: 'Select Source',
+      ru: 'Выберите источник'
+    })
+    config.addLabel('bibliography-volume-placeholder', {
+      en: 'Volume',
+      ru: 'Том'
+    })
+    config.addLabel('bibliography-page-placeholder', {
+      en: 'Page',
+      ru: 'Стр'
+    })
   }
 }

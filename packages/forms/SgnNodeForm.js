@@ -34,11 +34,17 @@ class OstNodeForm extends NodeForm {
       } else if(field.config.type === 'toggle') {
         this.forms.addToggleField(id, this.refs[id].getNativeElement(), field.config)
         this.forms.setValue(id, field.value)
+      } else if(field.config.type === 'reference') {
+        this.forms.addReferenceField(id, this.refs[id].getNativeElement(), field.config)
+        this.forms.setValue(id, field.value)
       } else if(field.config.type === 'image') {
         this.forms.addImageField(id, this.refs[id].getNativeElement(), field.config)
         this.forms.setValue(id, field.value)
-      } else if(field.config.type === 'reference') {
-        this.forms.addReferenceField(id, this.refs[id].getNativeElement(), field.config)
+      } else if(field.config.type === 'dropdown-reference') {
+        this.forms.addDropdownReferenceField(id, this.refs[id].getNativeElement(), field.config)
+        this.forms.setValue(id, field.value)
+      } else if(field.config.type === 'bibliography') {
+        this.forms.addBibliographyField(id, this.refs[id].getNativeElement(), field.config)
         this.forms.setValue(id, field.value)
       }
     }.bind(this))

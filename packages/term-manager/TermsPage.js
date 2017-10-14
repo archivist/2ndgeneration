@@ -10,9 +10,8 @@ class TermsPage extends Component {
     this.currentTarget = null
     this.updateStack = []
     this.handleActions({
-      'newSubject': this._newSubject,
+      'newTerm': this._newTerm,
       'toggleDescription': this._toggleDescription,
-      //'closeModal': this._doneEditing,
       'finishEditing': this._doneEditing,
       'closeResourceOperator': this._doneEditing,
       'updateEntity': this._updateEntity,
@@ -20,11 +19,15 @@ class TermsPage extends Component {
     })
   }
 
+  get pageName() {
+    return this.constructor.pageName
+  }
+
   getInitialState() {
     return {
       description: true,
       active: {},
-      filters: {entityType: 'subject'},
+      filters: {entityType: 'term'},
       search: '',
       perPage: 1000,
       order: 'cast(data->>\'position\' as integer)',
@@ -43,7 +46,7 @@ class TermsPage extends Component {
     const Modal = this.getComponent('modal')
 
     let items = this.state.items
-    let el = $$('div').addClass('sc-subjects-page')
+    let el = $$('div').addClass('sc-terms-page')
     let main = $$('div').addClass('se-entity-layout')
 
     let header = this.renderHeader($$)
@@ -120,7 +123,7 @@ class TermsPage extends Component {
   }
 
   renderHeader($$) {
-    let Header = this.getComponent(this.getLabel(this.pageName))
+    let Header = this.getComponent('header')
     return $$(Header)
   }
 
@@ -131,7 +134,7 @@ class TermsPage extends Component {
     let toolbox = $$(Toolbox, {
       actions: {
         'toggleDescription': this.getLabel('toggle-description'),
-        'newSubject': this.getLabel('add-subject')
+        'newTerm': this.getLabel('add-term')
       },
       content: filters
     })
@@ -159,7 +162,7 @@ class TermsPage extends Component {
         $$('h1').html(
           'No results'
         ),
-        $$('p').html('Sorry, no subjects matches your query')
+        $$('p').html('Sorry, no terms matches your query')
       )
     } else {
       let Spinner = this.getComponent('spinner')
@@ -248,18 +251,13 @@ class TermsPage extends Component {
 
     let additionalActions = [
       {label: this.getLabel('edit-action'), action: this._editItem.bind(this, node.id)},
-      {label: this.getLabel('show-documents-action'), action: this._loadReferences.bind(this, node.id)}
+      {label: this.getLabel('add-term-action'), action: this._newTerm.bind(this, node.id)}
     ]
 
     if(hideExpand) {
       additionalActions.push(
-        {label: this.getLabel('delete-action'), action: this._removeItem.bind(this, node.id)},
-        {label: this.getLabel('merge-action'), action: this._merge.bind(this, node.id)}
+        {label: this.getLabel('delete-action'), action: this._removeItem.bind(this, node.id)}
       )
-    }
-
-    if(this.state.mode === 'merge') {
-      additionalActions.push({label: 'Merge into', action: this._mergeInto.bind(this, node.id)})
     }
 
     let el = $$('div').addClass('se-row se-tree-node').append(
@@ -469,24 +467,25 @@ class TermsPage extends Component {
   }
 
   /*
-    Create a new subject
+    Create a new term
   */
-  _newSubject() {
+  _newTerm(parentId) {
+    parentId = typeof parentId === 'string' || parentId instanceof String ? parentId : 'root'
     let authenticationClient = this.context.authenticationClient
     let user = authenticationClient.getUser()
     let resourceClient = this.context.resourceClient
     let items = this.state.items
     let entityData = {
-      name: this.getLabel('unknown-subject'),
+      name: this.getLabel('term-default-name'),
       synonyms: [],
       description: '',
-      entityType: 'subject',
+      entityType: 'term',
       userId: user.userId,
       updatedBy: user.userId,
       data: {
-        name: this.getLabel('unknown-subject'),
+        name: this.getLabel('term-default-name'),
         workname: '',
-        parent: 'root',
+        parent: parentId,
         position: Object.keys(items.getRoots()).length,
         description: ''
       }
@@ -505,13 +504,14 @@ class TermsPage extends Component {
 
       items.create({
         id: entity.entityId,
-        type: 'subject',
+        type: 'term',
         name: entity.data.name,
-        workname: entity.data.workname,
         position: entity.data.position,
         count: 0,
+        edited: entity.edited,
+        updatedBy: entity.updatedBy,
         description: entity.data.description,
-        parent: 'root'
+        parent: parentId
       })
 
       this.extendProps({
@@ -526,7 +526,7 @@ class TermsPage extends Component {
   _loadData() {
     let resourceClient = this.context.resourceClient
     let mainConfigurator = this.context.configurator
-    let configurator = mainConfigurator.getConfigurator('archivist-subjects')
+    let configurator = mainConfigurator.getConfigurator('archivist-terms')
     let filters = this.state.filters
     let perPage = this.state.perPage
     let order = this.state.order
@@ -551,11 +551,11 @@ class TermsPage extends Component {
         return
       }
 
-      let importer = configurator.createImporter('subjects')
-      let subjects = importer.importDocument(res.records)
+      let importer = configurator.createImporter('terms')
+      let terms = importer.importDocument(res.records)
 
       this.extendState({
-        items: subjects
+        items: terms
       })
     })
   }

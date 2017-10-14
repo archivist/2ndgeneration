@@ -37,7 +37,8 @@ Person.type = 'person'
 Person.define({
   name: { type: 'string', default: '', field: { type: "text", dataType: "text", placeholder: "person-name-placeholder" }},
   description: { type: 'string', default: '', field: { type: "prose", placeholder: "person-description-placeholder" }},
-  global: { type: 'boolean', default: false, field: { type: "toggle", placeholder: "person-global-placeholder", nullable: false }}
+  global: { type: 'boolean', default: false, field: { type: "toggle", placeholder: "person-global-placeholder", nullable: false }},
+  bibliography: { type: ['object'], default: [], field: { type: "bibliography", placeholder: "person-bibliography-placeholder" }}
 })
 
 export default Person

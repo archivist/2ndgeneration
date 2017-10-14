@@ -7,6 +7,7 @@ import { CommentPackage, TimecodePackage } from 'archivist'
 import SubjectPackage from '../subject/package'
 import CommentaryPackage from '../commentary/package'
 import PersonPackage from '../person/package'
+import ToponymPackage from '../toponym/package'
 import EntityReferencePackage from '../entity-reference/package'
 import TocPackage from '../toc/package'
 
@@ -37,6 +38,7 @@ export default {
     config.import(SubjectPackage)
     config.import(CommentaryPackage)
     config.import(PersonPackage)
+    config.import(ToponymPackage)
     config.import(EntityReferencePackage)
     config.import(TocPackage)
 
