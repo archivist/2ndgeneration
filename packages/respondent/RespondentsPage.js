@@ -4,6 +4,14 @@ import { findIndex } from 'lodash-es'
 import RespondentRegister from './RespondentRegister'
 
 class RespondentsPage extends AbstractEntityPage {
+  constructor(...args) {
+    super(...args)
+
+    this.handleActions({
+      removeDragListners: this._removeDragListners
+    })
+  }
+
   render($$) {
     const Modal = this.getComponent('modal')
 
@@ -22,7 +30,7 @@ class RespondentsPage extends AbstractEntityPage {
         $$(Modal, {
           width: 'medium'
         }).addClass('se-respondent-editor').append(
-          $$(EntityEditor, {entityId: this.props.entityId}),
+          $$(EntityEditor, {entityId: this.props.entityId}).ref('editor'),
           $$(RespondentRegister, {entityId: this.props.entityId})
         ).ref('modal')
       )
@@ -56,6 +64,14 @@ class RespondentsPage extends AbstractEntityPage {
     )
 
     return el
+  }
+
+  _removeDragListners() {
+    let editor = this.refs.editor
+    if(editor) {
+      let editorSession = editor.state.session
+      if(editorSession) editorSession.dragManager.el.removeAllEventListeners()
+    }
   }
 }
 

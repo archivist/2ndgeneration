@@ -38,10 +38,6 @@ class BibliographyField extends Component {
     }
   }
 
-  didMount() {
-    window.bib = this
-  }
-
   render($$) {
     let values = this.state.values
     let openDialog = this.state.openDialog || false

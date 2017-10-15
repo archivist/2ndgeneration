@@ -114,6 +114,10 @@ export default {
       en: 'Select related respondent',
       ru: 'Выбирите респондента'
     })
+    config.addLabel('file-person-placeholder', {
+      en: 'Select related persons',
+      ru: 'Выбирите персоналии'
+    })
     config.addLabel('file-subject-placeholder', {
       en: 'Select related subjects',
       ru: 'Выбирите темы'

@@ -113,7 +113,9 @@ class Uploader extends Component {
       data: {
         file: fileName,
         gallery: ext === 'pdf' ? false : true,
-        respondent: this.props.respondent ? this.props.respondent : ''
+        respondent: this.props.respondent ? this.props.respondent : '',
+        persons: [],
+        position: this.props.position ? this.props.position : 0
       }
     }
 

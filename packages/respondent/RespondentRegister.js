@@ -1,10 +1,14 @@
 import { Component, FontAwesomeIcon as Icon } from 'substance'
-import { findIndex } from 'lodash-es'
+import { each, findIndex, throttle} from 'lodash-es'
 const mediaDestination = '/media'
 
 class RespondentRegister extends Component {
   constructor(...args) {
     super(...args)
+
+    this.dragSource = null
+    this.currentTarget = null
+    this.updateStack = []
 
     this.handleActions({
       'uploadFiles': this._uploadFiles,
@@ -17,6 +21,7 @@ class RespondentRegister extends Component {
 
   didMount() {
     this._loadRegister()
+    this.send('removeDragListners')
   }
 
   render($$) {
@@ -38,12 +43,20 @@ class RespondentRegister extends Component {
       )
     )
 
+    if(this.state.image) {
+      el.append(
+        $$('div').addClass('se-imageviewer').append(
+          $$('img').attr({src: mediaDestination + '/' + this.state.image})
+        )
+      ).on('click', this._hideImage)
+    }
+
     if(this.state.mode === 'upload') {
       el.append(
         $$(Modal, {
           width: 'medium'
         }).append(
-          $$(Uploader, {respondent: this.props.entityId})     
+          $$(Uploader, {respondent: this.props.entityId, position: items.length})
         ).ref('modal')
       )
     }
@@ -78,7 +91,7 @@ class RespondentRegister extends Component {
         let row = $$('div').addClass('se-row se-file').append(
           $$(Grid.Cell, {columns: 2}).addClass('se-thumbnail').attr({
             style: 'background-image: url("' + mediaDestination + '/s200/' + item.data.file + '");'
-          }),
+          }).on('click', this._showImage.bind(this, item.data.file)),
           $$(Grid.Cell, {columns: 8}).append(
             $$('div').addClass('se-title').setInnerHTML(item.name),
             $$('div').addClass('se-description').setInnerHTML(item.description)
@@ -92,7 +105,14 @@ class RespondentRegister extends Component {
             e.stopPropagation()
             this._removeItem(item.entityId)
           })
-        ).on('click', this._openEditor.bind(this, item.entityId))
+        )
+        .ref(item.entityId)
+        .on('click', this._openEditor.bind(this, item.entityId))
+        .attr({draggable: true})
+        .on('dragstart', this._onDragStart.bind(this, item.entityId))
+        .on('dragend', this._onDragEnd)
+        .on('dragover', throttle(this._onDragOver.bind(this, item.entityId), 300))
+
 
         grid.append(row)
       })
@@ -113,7 +133,14 @@ class RespondentRegister extends Component {
   _loadRegister() {
     let resourceClient = this.context.resourceClient
 
-    resourceClient.listEntities({entityType: 'file', 'data->>respondent': this.props.entityId}, {columns: ['"entityId"', 'name', 'description', 'data'], limit: 1000}, (err, res) => {
+    resourceClient.listEntities({
+      entityType: 'file',
+      'data->>respondent': this.props.entityId
+    }, {
+      columns: ['"entityId"', 'name', 'description', 'data'],
+      order: 'cast(data->>\'position\' as integer)',
+      limit: 1000
+    }, (err, res) => {
       if (err) console.error('ERROR', err)
       this.extendState({
         items: res.records,
@@ -132,7 +159,7 @@ class RespondentRegister extends Component {
 
   _closeUploader() {
     this.extendState({mode: undefined})
-    this._loadRegister()
+    this._fixPositions()
   }
 
   _doneEditing() {
@@ -148,6 +175,166 @@ class RespondentRegister extends Component {
   _closeResourceOperator() {
     this.extendState({entityId: undefined, mode: undefined})
     this._loadRegister()
+  }
+
+  _onDragStart(id, e) {
+    this._initDrag(id, e)
+  }
+
+  _onDragEnd() {
+    if(this.currentState === 'after' || this.currentState === 'before' ) {
+      this._moveItem(this.dragSource, this.currentTarget, this.currentState)
+    }
+    this.dragSource = null
+    this.currentTarget = null
+    this.currentDrillTarget = null
+    this.currentState = null
+  }
+
+  _onDragOver(id, e) {
+    this.currentTarget = id
+    let dropTarget = this.refs[id].getNativeElement()
+    let activeEls = dropTarget.parentElement.querySelectorAll('.se-drop-before, .se-drop-after')
+    for (let i = activeEls.length - 1; i >= 0; i--) {
+      activeEls[i].classList.remove('se-drop-before', 'se-drop-after')
+    }
+    let elHeight = dropTarget.offsetHeight
+    let after = e.offsetY >= elHeight/2
+    let before = e.offsetY < elHeight/2
+    if(after) {
+      dropTarget.classList.add('se-drop-after')
+      this.currentState = 'after'
+    } else if (before) {
+      dropTarget.classList.add('se-drop-before')
+      this.currentState = 'before'
+    }
+  }
+
+  _initDrag(id) {
+    this.dragSource = id
+    this.currentTarget = id
+  }
+
+  _getItemProp(id, prop) {
+    let items = this.state.items
+    let item = items.find(f => {return f.entityId === id})
+    return item.data ? item.data[prop] : item[prop]
+  }
+
+  _moveItem(source, target, pos) {
+    if(source === target) return
+
+    let items = this.state.items
+    console.info('moving', source, pos, target)
+    console.info('moving', this._getItemProp(source, 'name'), pos, this._getItemProp(target, 'name'))
+
+    let sourcePos = this._getItemProp(source, 'position')
+    //let sourceParent = items.get([source, 'parent'])
+    let dropPos = this._getItemProp(target, 'position')
+    let targetPos = pos === 'before' ? dropPos : dropPos + 1
+    //let targetParent = items.get([target, 'parent'])
+
+    // if(sourceParent === targetParent) {
+    //   if(sourcePos === targetPos) return
+    //   if(sourcePos - targetPos === 1 && pos === 'after') return
+    //   if(sourcePos - targetPos === -1 && pos === 'before') return
+    // }
+
+    if(sourcePos > targetPos) {
+      this._fixSourceLeaf(items, sourcePos)
+    }
+
+    let targetSiblings = this.state.items
+    each(targetSiblings, node => {
+      if(node.data.position >= targetPos) {
+        node.data.position = node.data.position + 1
+        this.updateStack.push(node.entityId)
+      }
+    })
+    console.info('new position', targetPos)
+    let sourceIndex = items.findIndex(f => {return f.entityId === source})
+    items[sourceIndex].data.position = targetPos
+    //items.set([source, 'parent'], targetParent)
+    this.updateStack.push(source)
+
+    if(sourcePos <= targetPos) {
+      this._fixSourceLeaf(items, sourcePos)
+    }
+
+    // debugging
+    // let tSiblings = targetParent !== null ? items.getChildren(targetParent) : items.getRoots()
+    // let tPositions = []
+    // each(tSiblings, n => {
+    //   tPositions.push(n.position)
+    // })
+    //
+    // console.info('target positions', tPositions)
+    // let sSiblings = sourceParent !== null ? items.getChildren(sourceParent) : items.getRoots()
+    // let sPositions = []
+    // each(sSiblings, n => {
+    //   sPositions.push(n.position)
+    // })
+    // console.info('source positions', sPositions)
+    items.sort((a, b) => {
+      return a.data.position - b.data.position
+    })
+    this.extendState({
+      items: items
+    })
+
+    this._performUpdate()
+  }
+
+  _fixSourceLeaf(items, sourcePos) {
+    let sourceSiblings = this.state.items
+    each(sourceSiblings, node => {
+      if(node.data.position >= sourcePos) {
+        node.data.position = node.data.position - 1
+        //items.set([node.id, 'position'], node.position - 1)
+        this.updateStack.push(node.entityId)
+      }
+    })
+  }
+
+  _fixPositions() {
+    let items = this.state.items
+    each(items, (node, id) => {
+      node.data.position = id
+      this.updateStack.push(node.entityId)
+    })
+
+    this._performUpdate()
+    this._loadRegister()
+  }
+
+  _performUpdate() {
+    let resourceClient = this.context.resourceClient
+    let items = this.state.items
+    let updated = []
+
+    each(this.updateStack, (id) => {
+      let record = items.find(f => {return f.entityId === id})
+      updated.push(record)
+    })
+
+    resourceClient.updateEntities(updated, (err) => {
+      if (err) {
+        console.error('ERROR', err)
+        return
+      }
+
+      this.updateStack = []
+    })
+  }
+
+  _showImage(file, e) {
+    e.preventDefault()
+    e.stopPropagation()
+    this.extendState({image: file})
+  }
+
+  _hideImage() {
+    this.extendState({image: false})
   }
 }
 
