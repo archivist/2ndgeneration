@@ -38,6 +38,7 @@ Respondent.define({
   biography: { type: 'string', default: '', field: { type: "prose", placeholder: "respondent-biography-placeholder" }},
   cover: { type: 'string', default: '', field: { type: "image", multi: false, placeholder: "cover-photo-placeholder" }},
   photo: { type: 'string', default: '', field: { type: "image", multi: false, placeholder: "respondent-photo-placeholder" }},
+  caption: { type: 'string', default: '', field: { type: "text", dataType: "text", placeholder: "respondent-caption-placeholder" }},
   bibliography: { type: ['object'], default: [], field: { type: "bibliography", placeholder: "person-bibliography-placeholder" }},
   published: { type: 'boolean', default: false, field: { type: "toggle", placeholder: "published-placeholder", nullable: false }}
 })

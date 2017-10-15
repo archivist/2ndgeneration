@@ -62,13 +62,17 @@ export default {
       en: 'Enter respondent biography',
       ru: 'Биография респондента'
     })
-    config.addLabel('cover-photo-placeholder', {
-      en: 'Upload cover photo',
-      ru: 'Загрузите обложку страницы'
-    })
     config.addLabel('respondent-photo-placeholder', {
       en: 'Upload respondent photo',
       ru: 'Загрузите фотографию респондента'
+    })
+    config.addLabel('respondent-caption-placeholder', {
+      en: 'Enter caption',
+      ru: 'Подпись к фотографии'
+    })
+    config.addLabel('cover-photo-placeholder', {
+      en: 'Upload cover photo',
+      ru: 'Загрузите обложку страницы'
     })
     config.addLabel('published-placeholder', {
       en: 'Published',
@@ -105,6 +109,10 @@ export default {
     config.addLabel('file-title-placeholder', {
       en: 'Enter file title',
       ru: 'Название файла'
+    })
+    config.addLabel('file-category-placeholder', {
+      en: 'Select file category',
+      ru: 'Категория файла'
     })
     config.addLabel('file-description-placeholder', {
       en: 'Enter story description',
