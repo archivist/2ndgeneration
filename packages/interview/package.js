@@ -104,6 +104,10 @@ export default {
       en: 'Enter abstract',
       ru: 'Резюме документа'
     })
+    config.addLabel('comment-description', {
+      en: 'Enter document description',
+      ru: 'Внутреннее описание документа'
+    })
     config.addLabel('title-description', {
       en: 'Enter interview title',
       ru: 'Укажите название документа'
@@ -123,6 +127,14 @@ export default {
     config.addLabel('year-of-birth-description', {
       en: 'Person year of birth',
       ru: 'Год рождения респондента'
+    })
+    config.addLabel('place-of-death-description', {
+      en: 'Person place of death',
+      ru: 'Место смерти респондента'
+    })
+    config.addLabel('date-of-death-description', {
+      en: 'Person date of death',
+      ru: 'Дата смерти респондента'
     })
     config.addLabel('photo-file-description', {
       en: 'Path to photo file',
