@@ -10,7 +10,9 @@ export default {
     config.addCommand(PersonReference.type, PersonCommand, { nodeType: PersonReference.type })
     config.addIcon(PersonReference.type, {'fontawesome': 'fa-address-book-o'})
     config.addComponent('person', PersonComponent)
+    config.addComponent('respondent', PersonComponent)
     config.addContextItem('person', PersonContextItem)
+    config.addContextItem('respondent', PersonContextItem)
     config.addLabel('person-resources', {
       en: 'Persons',
       ru: 'Персоналии'

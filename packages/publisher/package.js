@@ -92,5 +92,37 @@ export default {
       en: 'Enter comment',
       ru: 'Введите комментарий'
     })
+    config.addLabel('respondent-default-name', {
+      en: 'Unknown Respondent',
+      ru: 'Безымянный респондент'
+    })
+    config.addLabel('respondent-name-placeholder', {
+      en: 'Enter respondent name',
+      ru: 'Имя респондента'
+    })
+    config.addLabel('respondent-annotation-placeholder', {
+      en: 'Enter short annotation',
+      ru: 'Несколько слов о респонденте'
+    })
+    config.addLabel('respondent-biography-placeholder', {
+      en: 'Enter respondent biography',
+      ru: 'Биография респондента'
+    })
+    config.addLabel('respondent-photo-placeholder', {
+      en: 'Upload respondent photo',
+      ru: 'Загрузите фотографию респондента'
+    })
+    config.addLabel('respondent-caption-placeholder', {
+      en: 'Enter caption',
+      ru: 'Подпись к фотографии'
+    })
+    config.addLabel('cover-photo-placeholder', {
+      en: 'Upload cover photo',
+      ru: 'Загрузите обложку страницы'
+    })
+    config.addLabel('published-placeholder', {
+      en: 'Published',
+      ru: 'Опубликовано'
+    })
   }
 }

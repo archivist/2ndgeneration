@@ -20,7 +20,7 @@ class Respondent extends DocumentNode {
 
   // Get entity description
   getDescription() {
-    return this.annotation
+    return this.biography
   }
 
   // Get entity synonyms

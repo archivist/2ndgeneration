@@ -22,10 +22,12 @@ class PersonContextItem extends Component {
       el.addClass('se-focused')
     }
 
+    let description = node.description || node.biography
+
     el.append(
       $$('div').addClass('se-type').append(this.getLabel('person')),
       $$('div').addClass('se-title').append(node.name),
-      $$('div').addClass('se-description').setInnerHTML(node.description)
+      $$('div').addClass('se-description').setInnerHTML(description)
     )
 
     if(this.props.mode !== 'view') {

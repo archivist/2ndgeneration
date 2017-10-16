@@ -21,7 +21,7 @@ class ResourceEngine extends ArchivistResourceEngine {
     let query = `
       SELECT "entityId", "name", data->'parent' AS parent, data->'position' AS position
       FROM entities
-      WHERE "entityType" = $1 
+      WHERE "entityType" = $1
       ORDER BY cast(data->>'position' as integer) ASC
     `
 
@@ -32,7 +32,7 @@ class ResourceEngine extends ArchivistResourceEngine {
             cause: err
           }))
         }
-        
+
         resolve(entities)
       })
     })
@@ -41,7 +41,7 @@ class ResourceEngine extends ArchivistResourceEngine {
   updateResourcesTree(data) {
     return Promise.map(data, entity => {
       return this.updateEntity(entity.entityId, entity)
-    }) 
+    })
   }
 
   getResourcesTreeFacets(filters, entityType) {
@@ -77,7 +77,7 @@ class ResourceEngine extends ArchivistResourceEngine {
       WHERE "entityType" = '${entityType}'
       ORDER BY pos ASC
     `
-    
+
     return new Promise((resolve, reject) => {
       this.db.run(query, where.params, (err, entities) => {
         if (err) {
@@ -85,7 +85,7 @@ class ResourceEngine extends ArchivistResourceEngine {
             cause: err
           }))
         }
-        
+
         resolve(entities)
       })
     })
@@ -93,11 +93,11 @@ class ResourceEngine extends ArchivistResourceEngine {
 
   getLocationsList() {
     let query = `
-      SELECT "entityId", name, "entityType", data, 
+      SELECT "entityId", name, "entityType", data,
       (SELECT COUNT(*) FROM documents WHERE "references" ? "entityId") AS cnt,
       (SELECT SUM(("references"->"entityId")::text::integer) FROM documents WHERE "references" ? "entityId") AS sum
       FROM entities
-      WHERE ("entityType" = 'prison' OR "entityType" = 'toponym') 
+      WHERE ("entityType" = 'prison' OR "entityType" = 'toponym')
       AND (SELECT COUNT(*) FROM documents WHERE "references" ? "entityId") > 0
     `
 
@@ -108,7 +108,7 @@ class ResourceEngine extends ArchivistResourceEngine {
             cause: err
           }))
         }
-        
+
         let geojson = {
           type: "FeatureCollection",
           features: []
@@ -143,18 +143,18 @@ class ResourceEngine extends ArchivistResourceEngine {
     if(letter !== 'undefined') letterCondition = 'AND lower(LEFT(name, 1)) = \'' + letter + '\''
 
     let countQuery = `
-      SELECT COUNT(*) 
+      SELECT COUNT(*)
       FROM entities
-      WHERE "entityType" = 'person' 
+      WHERE "entityType" = 'person'
       AND entities.data->'global' = 'true' ${letterCondition}
     `
 
     let query = `
-      SELECT "entityId", name, description, 
+      SELECT "entityId", name, description,
       (SELECT COUNT(*) FROM documents WHERE "references" ? "entityId" AND meta->>'state' = 'published') AS count,
       (SELECT SUM(("references"->"entityId")::text::integer) FROM documents WHERE "references" ? "entityId" AND meta->>'state' = 'published') AS fragments
       FROM entities
-      WHERE "entityType" = 'person' 
+      WHERE "entityType" = 'person'
       AND entities.data->'global' = 'true' ${letterCondition}
       AND (SELECT COUNT(*) FROM documents WHERE "references" ? "entityId") > 0
       ORDER BY name ASC
@@ -180,7 +180,7 @@ class ResourceEngine extends ArchivistResourceEngine {
             total: count[0].count,
             records: entities
           }
-          
+
           resolve(results)
         })
       })
@@ -204,7 +204,7 @@ class ResourceEngine extends ArchivistResourceEngine {
             cause: err
           }))
         }
-        
+
         resolve(stats)
       })
     })
@@ -225,6 +225,31 @@ class ResourceEngine extends ArchivistResourceEngine {
       })
       .then(() => {
         return this.entityStore.deleteEntity(entityId)
+      })
+  }
+
+  listEntities(args) {
+    let filters = !isEmpty(args.filters) ? JSON.parse(args.filters) : {}
+    let options = !isEmpty(args.options) ? JSON.parse(args.options) : {}
+    let results = {}
+
+    if(filters.entityType === 'person') {
+      filters.entityType = ['person', 'respondent']
+    }
+
+    // TODO: avoid sql here
+    // last element is sql expression for geting total number of backreferences
+    if(!options.columns) options.columns = ['"entityId"', '"entityType"', "name", "description", "synonyms", 'created', 'edited', '(SELECT name FROM users WHERE "userId" = "updatedBy") AS "updatedBy"', '"userId"', '(SELECT COUNT(*) FROM documents WHERE "references" ? "entityId") AS count']
+    if(options.mode === 'full') options.columns.push('data')
+
+    return this.entityStore.countEntities(filters)
+      .then(count => {
+        results.total = count
+        return this.entityStore.listEntities(filters, options)
+      })
+      .then(function(entities) {
+        results.records = entities
+        return results
       })
   }
 }
