@@ -3,7 +3,8 @@ let config = require('config')
 let multer = require('multer')
 let uuid = require('substance').uuid
 
-const destination = config.mediaEndpoint || './media'
+const serverConfig = config.get('server')
+const destination = serverConfig.mediaEndpoint || './media'
 
 /*
   Implements File Store API.
