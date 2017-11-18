@@ -1,10 +1,10 @@
-const ChangeStorePackage = require('archivist').ChangeStorePackage
-const DocumentStorePackage = require('archivist').DocumentStorePackage
-const EntityStorePackage = require('archivist').EntityStorePackage
-const FragmentStorePackage = require('archivist').FragmentStorePackage
-const SessionStorePackage = require('archivist').SessionStorePackage
-const SnapshotStorePackage = require('archivist').SnapshotStorePackage
-const UserStorePackage = require('archivist').UserStorePackage
+const ChangeStorePackage = require('archivist-js').ChangeStorePackage
+const DocumentStorePackage = require('archivist-js').DocumentStorePackage
+const EntityStorePackage = require('archivist-js').EntityStorePackage
+const FragmentStorePackage = require('archivist-js').FragmentStorePackage
+const SessionStorePackage = require('archivist-js').SessionStorePackage
+const SnapshotStorePackage = require('archivist-js').SnapshotStorePackage
+const UserStorePackage = require('archivist-js').UserStorePackage
 const FileStorePackage = require('./file/package')
 
 module.exports = {

@@ -1,4 +1,4 @@
-let ArchivistDocumentEngine = require('archivist').DocumentEngine
+let ArchivistDocumentEngine = require('archivist-js').DocumentEngine
 let Err = require('substance').SubstanceError
 let filter = require('lodash/filter')
 let forEach = require('lodash/forEach')
@@ -9,9 +9,9 @@ class DocumentEngine extends ArchivistDocumentEngine {
 
   listDocuments(args, cb) {
     let filters = !isEmpty(args.filters) ? JSON.parse(args.filters) : {}
-    let options = !isEmpty(args.options) ? JSON.parse(args.options) : {} 
+    let options = !isEmpty(args.options) ? JSON.parse(args.options) : {}
     let results = {}
-    
+
     if(!options.columns) options.columns = ['"documentId"', '"schemaName"', '"schemaVersion"', "meta", "title", "language", '"updatedAt"', '(SELECT name FROM users WHERE "userId" = "updatedBy") AS "updatedBy"', '"userId"', '"references"']
 
     let topics = filters.topics ? filters.topics : []
@@ -43,7 +43,7 @@ class DocumentEngine extends ArchivistDocumentEngine {
         })
 
         results.records = docs
-        
+
         cb(null, results)
       })
     }.bind(this))
@@ -68,7 +68,7 @@ class DocumentEngine extends ArchivistDocumentEngine {
 
         let filtered = filter(options, o => { return !isEmpty(o.value) && o.value !== null })
         let values = map(filtered, opt => { return opt.value })
-        
+
         resolve(values)
       })
     })

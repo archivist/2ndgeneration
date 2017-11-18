@@ -1,5 +1,5 @@
 import { DefaultDOMElement } from 'substance'
-import { Forms } from 'archivist'
+import { Forms } from 'archivist-js'
 import ImageField from './image-field/ImageField'
 import DropdownReferenceField from './dropdown-reference-field/DropdownReferenceField'
 import BibliographyField from './bibliography-field/BibliographyField'

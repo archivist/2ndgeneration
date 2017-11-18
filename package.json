@@ -3,7 +3,7 @@
   "description": "",
   "main": "dist/sgn.cjs.js",
   "dependencies": {
-    "archivist": "archivist/archivist#b63a8495cc8b424fb0ffd63f2b3301e351e88407",
+    "archivist-js": "preview",
     "bluebird": "^3.4.7",
     "body-parser": "^1.15.2",
     "config": "^1.21.0",
@@ -15,7 +15,7 @@
     "multer": "^1.3.0",
     "plyr": "^2.0.11",
     "sharp": "^0.18.2",
-    "substance": "substance/substance#cafe7eb5a8bccb9c64feee6926b8acfb45c13a5b",
+    "substance": "container-annos",
     "ws": "^1.1.1"
   },
   "devDependencies": {

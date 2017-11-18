@@ -1,4 +1,4 @@
-let ArchivistResourceServer = require('archivist').ResourceServer
+let ArchivistResourceServer = require('archivist-js').ResourceServer
 
 /*
   ResourceServer module. Can be bound to an express instance

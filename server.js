@@ -11,15 +11,15 @@ var httpServer = http.createServer();
 var wss = new WebSocketServer({ server: httpServer });
 
 /*
-  Express body-parser configureation 
+  Express body-parser configureation
 */
 app.use(bodyParser.json({limit: '3mb'}));
 app.use(bodyParser.urlencoded({ extended: true, limit: '3mb', parameterLimit: 3000 }));
 
-/* 
+/*
   Config
 */
-var ServerConfigurator = require('archivist').ServerConfigurator;
+var ServerConfigurator = require('archivist-js').ServerConfigurator;
 var ServerPackage = require('./packages/server/package');
 var configurator = new ServerConfigurator();
 configurator.setServerApp(app);
@@ -55,7 +55,7 @@ app.use(function(err, req, res, next) {
   if (res.headersSent) {
     return next(err);
   }
-  
+
   if (err.inspect) {
     // This is a SubstanceError where we have detailed info
     console.error(err.inspect());
@@ -63,7 +63,7 @@ app.use(function(err, req, res, next) {
     // For all other errors, let's just print the stack trace
     console.error(err.stack);
   }
-  
+
   res.status(500).json({
     errorName: err.name,
     errorMessage: err.message || err.name

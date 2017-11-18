@@ -1,4 +1,4 @@
-import { NodeForm } from 'archivist'
+import { NodeForm } from 'archivist-js'
 import { each } from 'lodash-es'
 import SgnForms from './SgnForms'
 

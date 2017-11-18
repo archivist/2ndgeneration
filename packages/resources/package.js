@@ -1,5 +1,5 @@
 import ResourceSelector from './ResourceSelector'
-import { EntityEditorPackage, PagerPackage, ResourcesContext } from 'archivist'
+import { EntityEditorPackage, PagerPackage, ResourcesContext } from 'archivist-js'
 
 export default {
   name: 'sgn-resources',

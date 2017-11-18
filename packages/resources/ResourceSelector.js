@@ -1,4 +1,4 @@
-import { ResourceSelector } from 'archivist'
+import { ResourceSelector } from 'archivist-js'
 import { find } from 'lodash-es'
 
 class SgnResourcesSelector extends ResourceSelector {

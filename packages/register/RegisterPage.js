@@ -1,5 +1,5 @@
 import { SplitPane } from 'substance'
-import { AbstractEntityPage } from 'archivist'
+import { AbstractEntityPage } from 'archivist-js'
 import { findIndex } from 'lodash-es'
 import Uploader from './Uploader'
 

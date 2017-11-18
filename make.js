@@ -52,7 +52,7 @@ function buildApp(app, production) {
       }],
       commonjs: {
         include: [
-          'node_modules/moment/moment.js', 
+          'node_modules/moment/moment.js',
           'node_modules/plyr/src/js/plyr.js',
           'node_modules/dropzone/dist/dropzone.js'
         ]
@@ -63,7 +63,7 @@ function buildApp(app, production) {
         'archivist': 'archivist'
       }
     })
-    
+
     b.custom('injecting config', {
       src: './dist/' + app + '/app.js',
       dest: './dist/' + app + '/' + app + '.js',
@@ -71,7 +71,7 @@ function buildApp(app, production) {
         const code = fs.readFileSync(file[0], 'utf8')
         const result = code.replace(/ARCHIVISTCONFIG/g, JSON.stringify(config.get('app')))
         fs.writeFileSync(this.outputs[0], result, 'utf8')
-      }      
+      }
     })
     if(production) {
       b.minify('./dist/' + app + '/' + app + '.js', './dist/' + app + '/' + app + '.min.js')
@@ -85,10 +85,10 @@ function buildApp(app, production) {
 
 function buildServerJS() {
   b.js('./index.es.js', {
-    external: ['substance', 'archivist'],
+    external: ['substance', 'archivist-js'],
     globals: {
       'substance': 'substance',
-      'archivist': 'archivist'
+      'archivist-js': 'archivist-js'
     },
     targets: [{
       dest: 'dist/sgn.cjs.js',
@@ -100,11 +100,9 @@ function buildServerJS() {
 /* HELPERS */
 
 function _buildDeps(min) {
-  b.make('substance', 'lib')
   b.copy('node_modules/substance/dist', './dist/libs/substance')
   if(min) b.minify('./dist/libs/substance/substance.js', './dist/libs/substance/substance.min.js')
 
-  b.make('archivist', 'lib')
-  b.copy('node_modules/archivist/dist', './dist/libs/archivist')
+  b.copy('node_modules/archivist-js/dist', './dist/libs/archivist')
   if(min) b.minify('./dist/libs/archivist/archivist.js', './dist/libs/archivist/archivist.min.js')
 }

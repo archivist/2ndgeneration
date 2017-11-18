@@ -1,5 +1,5 @@
 import { ProseEditorPackage } from 'substance'
-import { ArchivistPackage, ArchivistSubConfigurator, CommentsPackage, DocumentsPackage, IndentationPackage, MetadataEditorPackage, TimecodeAnnotatorPackage, UsersPackage, WhitespacePackage } from 'archivist'
+import { ArchivistPackage, ArchivistSubConfigurator, CommentsPackage, DocumentsPackage, IndentationPackage, MetadataEditorPackage, TimecodeAnnotatorPackage, UsersPackage, WhitespacePackage } from 'archivist-js'
 import InterviewPackage from '../../packages/interview/package'
 import FormsPackage from '../../packages/forms/package'
 import ResourcesPackage from '../../packages/resources/package'
