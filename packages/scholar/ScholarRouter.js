@@ -11,7 +11,7 @@ class ScholarRouter extends Router {
 
   // URL helpers
   openDocument(documentId, entityId, topicId) {
-    let url = '/documents/' + documentId
+    let url = '/document/' + documentId
     if(entityId) url += '#entityId=' + entityId
     if(topicId) url += '#topic=' + topicId
     return url
@@ -26,22 +26,12 @@ class ScholarRouter extends Router {
     return '/resources/' + entityId
   }
 
-  openMap(entityId) {
-    return '/maps/' + entityId
-  }
-
   openPerson(entityId) {
-    return '/persons/' + entityId
+    return '/person/' + entityId
   }
 
   focusResource(entityId) {
     let route = '#entityId=' + entityId
-    this._writeRoute(route, {})
-  }
-
-  focusMapResource(entityId) {
-    let route = '/maps'
-    if(entityId) route += '/' + entityId
     this._writeRoute(route, {})
   }
 

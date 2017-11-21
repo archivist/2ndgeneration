@@ -12,7 +12,7 @@
   padding-bottom: 20px;
   margin-bottom: 15px;
   white-space: pre-wrap;
-} 
+}
 
 .sc-context-source .se-technical-info .se-meta-prop {
   margin-bottom: 10px;
@@ -36,4 +36,5 @@
   z-index: 99;
   top: 40px;
   padding: 20px;
+  box-sizing: border-box;
 }

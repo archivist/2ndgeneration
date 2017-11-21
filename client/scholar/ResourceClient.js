@@ -9,6 +9,17 @@ class ResourceClient {
     this.config = config
   }
 
+  listRespondents(options, cb) {
+    let optionsRequest = encodeURIComponent(JSON.stringify(options))
+    //request('GET', '/api/entities/respondents?options=' + optionsRequest, null, cb)
+    request('GET', '/api/public/respondents?options=' + optionsRequest, null, cb)
+  }
+
+  getRespondentData(personId, cb) {
+    request('GET', '/api/public/respondents/' + personId, null, cb)
+  }
+
+
   /*
     Read all document resources
   */
@@ -60,14 +71,14 @@ class ResourceClient {
     Get top entity results for search query
   */
   searchTopResources(query, language, cb) {
-    request('GET', '/api/entities/search/top?query=' + query + '&language=' + language, null, cb)    
+    request('GET', '/api/entities/search/top?query=' + query + '&language=' + language, null, cb)
   }
 
   /*
     Get topic results for search query
   */
   searchTopics(query, language, cb) {
-    request('GET', '/api/entities/search/topics?query=' + query + '&language=' + language, null, cb)    
+    request('GET', '/api/entities/search/topics?query=' + query + '&language=' + language, null, cb)
   }
 
   /*
@@ -86,7 +97,7 @@ class ResourceClient {
   }
 
   /*
-    Get list of person first letters with counters 
+    Get list of person first letters with counters
   */
   getPersonsStats(cb) {
     request('GET', '/api/entities/persons/stats', null, cb)

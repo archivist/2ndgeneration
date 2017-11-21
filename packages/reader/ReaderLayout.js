@@ -55,8 +55,7 @@ class ReaderLayout extends Component {
     let Spinner = this.getComponent('spinner')
 
     let el = $$('div').addClass('sc-read-document')
-    let Header = this.getComponent('header')
-    el.append($$(Header))
+
     let main = $$(Layout, {
       width: 'medium',
       textAlign: 'center'
@@ -95,6 +94,8 @@ class ReaderLayout extends Component {
       //let docRecord = SampleDoc
       let document = configurator.createDocument()
       let doc = converter.importDocument(document, docRecord.data)
+      const meta = doc.getDocumentMeta()
+      const respondentId = meta.interviewee
 
       let session = new EditorSession(doc, {
         configurator: configurator
@@ -106,7 +107,8 @@ class ReaderLayout extends Component {
 
       series([
         this._loadResources(documentId, session),
-        this._loadSubjects(session)
+        this._loadSubjects(session),
+        this._loadRespondent(respondentId, session)
       ], () => {
         this.setState({
           session: session
@@ -154,6 +156,16 @@ class ReaderLayout extends Component {
   _loadDocumentResources(documentId, cb) {
     let resourceClient = this.context.resourceClient
     resourceClient.getDocumentResources(documentId, cb)
+  }
+
+  _loadRespondent(respondentId, session) {
+    const resourceClient = this.context.resourceClient
+    return function(cb) {
+      resourceClient.getRespondentData(respondentId, (err, respondent) => {
+        session.respondent = respondent
+        cb()
+      })
+    }
   }
 
   _onError(err) {

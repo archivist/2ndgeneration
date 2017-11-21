@@ -54,33 +54,13 @@ class SourcePlayerOverlay extends Component {
   }
 
   render($$) {
-    let config = this.context.config
     let el = $$('div').addClass('sc-overlay-player')
 
-    if(this.state.type === 'video') {
-      let player = $$('div')
-        .addClass('se-media')
-        .attr({'data-type': 'vimeo', 'data-video-id': this.state.media})
+    let player = $$('div')
+      .addClass('se-media')
+      .attr({'data-type': 'youtube', 'data-video-id': this.state.media})
 
-      el.append(player)
-    } else if (this.state.type === 'audio') {
-      let player = $$('audio')
-        .addClass('se-media')
-        .attr({controls: true})
-
-      player.append(
-        $$('source').attr({
-          src: config.mediaServer + '/audio/' + this.state.media + '.mp3',
-          type: 'audio/mp3'
-        }),
-        $$('source').attr({
-          src: config.mediaServer + '/audio/' + this.state.media + '.ogg',
-          type: 'audio/ogg'
-        })
-      )
-
-      el.append(player)
-    }
+    el.append(player)
 
     return el
   }
@@ -99,7 +79,7 @@ class SourcePlayerOverlay extends Component {
   /*
     Rewind player to initial time
     TODO: find a proper way to rewind when video is ready
-    we can't relay on plyr's ready event as it fired too early 
+    we can't relay on plyr's ready event as it fired too early
   */
   _onPlayerLoad() {
     this._updateWidth()

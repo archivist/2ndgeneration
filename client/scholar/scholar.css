@@ -1,9 +1,42 @@
-@import '../../packages/header/_index.css';
+@import '../../packages/menu/_index.css';
+@import '../../packages/simple-explorer/_index.css';
+@import '../../packages/personal-archive/_index.css';
 @import '../../packages/explorer/_index.css';
 @import '../../packages/reader/_index.css';
 @import '../../packages/person/_index.css';
 @import '../../packages/subject/_index.css';
 @import '../../packages/info-context/_index.css';
 @import '../../packages/resources-context/_index.css';
+@import '../../packages/respondent-context/_index.css';
 @import '../../packages/source-context/_index.css';
 @import '../../packages/subjects-context/_index.css';
+
+html { font-size: calc(1em + 1vw); }
+
+/* setting the max width*/
+ @media screen and (min-width: 50em) {
+  html {
+    font-size: 1.5em;
+  }
+
+}
+
+body {
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Oswald', sans-serif;
+}
+
+p {
+  font-size: 0.6em;
+  line-height: 1.7em;
+  margin-bottom: 1em;
+  font-weight: 500;
+}
+
+*, *:after, *:before {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}

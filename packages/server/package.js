@@ -5,9 +5,9 @@ let Database = require('./Database')
 let EnginePackage = require('../engine/package')
 let IndexerPackage = require('../indexer/package')
 let ResourceServerPackage = require('./resource/package')
-let ConverterServerPackage = require('./converter/package')
 let DocumentServerPackage = require('./document/package')
 let FileServerPackage = require('./file/package')
+let PublicServerPackage = require('./public/package')
 let ArchivistSubConfigurator = require('archivist-js').ArchivistSubConfigurator
 let AuthServerPackage = require('archivist-js').AuthServerPackage
 let CollabServerPackage = require('archivist-js').CollabServerPackage
@@ -34,7 +34,7 @@ module.exports = {
     config.import(ResourceServerPackage)
     config.import(UserServerPackage)
     config.import(FileServerPackage)
-    config.import(ConverterServerPackage)
+    config.import(PublicServerPackage)
 
     // Subjects subconfigurator
     config.addConfigurator('archivist-subjects', new ArchivistSubConfigurator().import(SubjectsPackage))

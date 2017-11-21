@@ -1,20 +1,24 @@
-import { ProseArticle } from 'substance'
+import { ProseEditorPackage } from 'substance'
 import ScholarPackage from '../../packages/scholar/package'
-import HeaderPackage from '../../packages/header/package'
-import ExplorerPackage from '../../packages/explorer/package'
+import MenuPackage from '../../packages/menu/package'
+import PersonalArchive from '../../packages/personal-archive/package'
+import ExplorerPackage from '../../packages/simple-explorer/package'
 import SubjectsPackage from '../../packages/subjects/package'
 import ReaderPackage from '../../packages/reader/package'
 import InterviewPackage from '../../packages/interview/package'
 import SourceContextPackage from '../../packages/source-context/package'
 import ResourcesContextPackage from '../../packages/resources-context/package'
-import SubjectsContextPackage from '../../packages/subjects-context/package'
-import InfoContextPackage from '../../packages/info-context/package'
+// import SubjectsContextPackage from '../../packages/subjects-context/package'
+// import InfoContextPackage from '../../packages/info-context/package'
+import RespondentContextPackage from '../../packages/respondent-context/package'
 import ScholarSubConfigurator from '../../packages/scholar/ScholarSubConfigurator'
 import DocumentClient from './DocumentClient'
 import ResourceClient from './ResourceClient'
 
 // Entities definitions
 import Person from '../../packages/person/Person'
+
+const { ProseArticle } = ProseEditorPackage
 
 let appConfig = 'ARCHIVISTCONFIG'
 appConfig = JSON.parse(appConfig)
@@ -23,7 +27,8 @@ export default {
   name: 'archivist-scholar',
   configure: function(config) {
     config.import(ScholarPackage)
-    config.import(HeaderPackage)
+    config.import(MenuPackage)
+    config.import(PersonalArchive)
     config.import(ExplorerPackage)
     config.setDefaultLanguage(appConfig.defaultLanguage)
 
@@ -34,14 +39,14 @@ export default {
     ReaderConfigurator.import(ReaderPackage)
     ReaderConfigurator.import(InterviewPackage)
     ReaderConfigurator.import(SourceContextPackage)
-    ReaderConfigurator.import(SubjectsContextPackage)
+    // ReaderConfigurator.import(SubjectsContextPackage)
     ReaderConfigurator.import(ResourcesContextPackage)
-    ReaderConfigurator.import(InfoContextPackage)
+    ReaderConfigurator.import(RespondentContextPackage)
+    // ReaderConfigurator.import(InfoContextPackage)
     ReaderConfigurator.setResourceTypes([
       {id: 'toponym', name: 'toponym-resources'},
-      {id: 'prison', name: 'prison-resources'},
       {id: 'person', name: 'person-resources'},
-      {id: 'definition', name: 'definition-resources'}
+      {id: 'commentary', name: 'commentary-resources'}
     ])
     ReaderConfigurator.setDefaultLanguage(appConfig.defaultLanguage)
     config.addConfigurator('archivist-interview-reader', ReaderConfigurator)
@@ -50,7 +55,8 @@ export default {
     let EntitiesConfigurator = new ScholarSubConfigurator()
     EntitiesConfigurator.defineSchema({
       name: 'archivist-entities',
-      ArticleClass: ProseArticle
+      version: '1.0.0',
+      DocumentClass: ProseArticle
     })
     EntitiesConfigurator.addNode(Person)
     config.addConfigurator('archivist-entities', EntitiesConfigurator)

@@ -25,20 +25,44 @@ class FileServer {
         }))
       }
       if(req.file.mimetype.indexOf('image') > -1) {
-        sharp(req.file.path)
-          .resize(200, 200)
-          .toFile(req.file.destination + '/s200/' + req.file.filename, err => {
-            if (err) {
-              return next(new Err('FileStore.UploadError', {
-                cause: err
-              }))
-            }
-
-            res.json({name: this.store.getFileName(req)})
-          })
+        Promise.all([
+          this._resize200(req),
+          this._resize400(req)
+        ]).then(() => {
+          res.json({name: this.store.getFileName(req)})
+        })
       } else {
         res.json({name: this.store.getFileName(req)})
       }
+    })
+  }
+
+  _resize200(req) {
+    return new Promise((resolve, reject) => {
+      sharp(req.file.path)
+        .resize(200, 200)
+        .toFile(req.file.destination + '/s200/' + req.file.filename, err => {
+          if (err) {
+            return reject(err)
+          }
+
+          resolve()
+        })
+    })
+  }
+
+  _resize400(req) {
+    return new Promise((resolve, reject) => {
+      sharp(req.file.path)
+        .resize(400, 400)
+        .max()
+        .toFile(req.file.destination + '/s400/' + req.file.filename, err => {
+          if (err) {
+            return reject(err)
+          }
+
+          resolve()
+        })
     })
   }
 

@@ -1,0 +1,224 @@
+.sc-respondent > .se-content {
+  position: absolute;
+  overflow: scroll;
+  top: 0em;
+  left: 0em;
+  height: 100vh;
+  width: 100%;
+  z-index: 10;
+}
+
+.sc-respondent .se-biography .se-photo-inline {
+  float: left;
+  margin: 0.2em 1em 0.2em 0em;
+}
+
+.sc-respondent .se-biography .se-photo-inline img {
+  max-height: 8em;
+}
+
+.sc-respondent .se-biography .se-photo {
+  width: 30vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 2em;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
+
+
+.sc-respondent > .se-content .se-section-title {
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  color: #c2c2c2;
+  font-size: 0.6em;
+  margin-bottom: 2em;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 0.3em;
+}
+
+.sc-respondent > .se-content .sm-content-section {
+  padding: 1em 2em;
+}
+
+.sc-respondent > .se-content .se-biography .se-title {
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  margin-bottom: 1em;
+  padding-bottom: 0.1em;
+  font-size: 2em;
+  line-height: 1.2em;
+  font-weight: 300;
+}
+
+.sc-respondent > .se-content .se-stories .se-videos {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+}
+
+.sc-respondent > .se-content .se-stories .se-videos > .se-item {
+  width: 9em;
+  margin-bottom: 2em;
+  cursor: pointer;
+}
+
+.sc-respondent > .se-content .se-stories .se-video-cover {
+  position: relative;
+  height: 6em;
+  width: 9em;
+  background-size: cover;
+  border-radius: 0.3em;
+  z-index: 10;
+}
+
+.sc-respondent > .se-content .se-stories .se-video-cover::before {
+  background: url(/assets/play_btn.png);
+  content: " ";
+  width: 3em;
+  height: 3em;
+  display: block;
+  background-size: cover;
+  left: calc(50% - 1.5em);
+  top: calc(50% - 1.5em);
+  position: absolute;
+  opacity: 0.5;
+}
+
+.sc-respondent > .se-content .se-stories .se-item:hover .se-video-cover::before {
+  opacity: 0.7;
+}
+
+.sc-respondent > .se-content .se-stories .se-video-abstract {
+  margin-top: 1.2em;
+  line-height: 1.4em;
+  font-size: 0.8em;
+}
+
+.sc-respondent > .se-content .se-interviews .se-item {
+  display: block;
+  position: relative;
+  font-size: 0.5em;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  margin-bottom: 1em;
+  border-radius: 0.3em;
+  height: 6em;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sc-respondent > .se-content .se-interviews .se-item.se-media .se-interview-cover {
+  height: 6em;
+  width: 6em;
+  background-size: cover;
+  position: absolute;
+}
+
+.sc-respondent > .se-content .se-interviews .se-item.se-media .se-interview-cover::before {
+  background: url(assets/play_btn.png);
+  content: " ";
+  width: 3em;
+  height: 3em;
+  display: block;
+  background-size: cover;
+  left: calc(50% - 1.5em);
+  top: calc(50% - 1.5em);
+  position: absolute;
+  opacity: 0.5;
+}
+
+.sc-respondent > .se-content .se-interviews .se-item.se-media:hover .se-interview-cover::before {
+  opacity: 0.7;
+}
+
+.sc-respondent > .se-content .se-interviews .se-item .se-interview-metadata {
+  position: absolute;
+  width: calc(100% - 2em);
+  left: 1em;
+  font-weight: 300;
+}
+
+.sc-respondent > .se-content .se-interviews .se-item.se-media .se-interview-metadata {
+  width: calc(100% - 8em);
+  left: 7em;
+}
+
+.sc-respondent > .se-content .se-interviews .se-item .se-interview-metadata .se-interview-title {
+  padding: 1em 0em;
+  margin-bottom: 0.5em;
+  font-weight: 500;
+  font-size: 1.2em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.sc-respondent > .se-content .se-interviews .se-item .se-interview-metadata .se-interview-date {
+  float: left;
+}
+
+.sc-respondent > .se-content .se-interviews .se-item .se-interview-metadata .se-interview-location {
+  float: right;
+}
+
+.sc-respondent > .se-content .se-archive .se-item {
+  position: relative;
+  display: flex;
+  font-size: 0.5em;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  margin-bottom: 1em;
+  border-radius: 0.3em;
+  height: 4em;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.sc-respondent > .se-content .se-archive .se-item .se-item-thumb {
+  height: 4em;
+  width: 4em;
+  background-size: cover;
+}
+
+.sc-respondent > .se-content .se-archive .se-item:hover .se-item-thumb::before {
+  background: url(assets/magn_btn.png);
+  content: " ";
+  width: 3em;
+  height: 3em;
+  display: block;
+  background-size: cover;
+  left: 0.5em;
+  top: calc(50% - 1.5em);
+  position: absolute;
+  opacity: 0.8;
+}
+
+.sc-respondent > .se-content .se-archive .se-item .se-item-title {
+  width: calc(100% - 6em);
+  margin-top: 0.5em;
+  margin-left: 1em;
+  font-weight: 500;
+  line-height: 1.5em;
+  word-break: normal;
+  overflow: hidden;
+  height: calc(100% - 1em);
+}
+
+.sc-document .sc-reader > .sc-split-pane {
+  left: 50px;
+}
+
+.sc-document .sc-reader .se-context-section {
+  min-width: auto;
+}
+
+.sc-document .sc-reader .sc-layout {
+  width: auto;
+}

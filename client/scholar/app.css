@@ -1,9 +1,4 @@
 /* Scholar styles */
-@import '../../node_modules/substance/dist/substance.next.css';
-@import '../../node_modules/plyr/dist/plyr.css';
+@import url('https://fonts.googleapis.com/css?family=Oswald:200,300,400|Roboto');
 @import './scholar.css';
-
-body {
-  overflow: hidden;
-  -webkit-font-smoothing: antialiased;
-}
+@import '../../node_modules/plyr/dist/plyr.css';

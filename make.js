@@ -16,8 +16,8 @@ b.task('scholar', buildApp('scholar'))
 b.task('publisher-min', buildApp('publisher', true))
 b.task('scholar-min', buildApp('scholar', true))
 // build apps
-b.task('client', ['publisher'/*, 'scholar'*/])
-b.task('client-min', [/*'scholar-min', */'publisher-min'])
+b.task('client', ['publisher', 'scholar'])
+b.task('client-min', ['scholar-min', 'publisher-min'])
 // build libraries
 b.task('deps', () => {
   _buildDeps()
@@ -60,7 +60,7 @@ function buildApp(app, production) {
       external: ['substance', 'archivist'],
       globals: {
         'substance': 'substance',
-        'archivist': 'archivist'
+        'archivist-js': 'archivist-js'
       }
     })
 

@@ -1,0 +1,62 @@
+.sc-spine {
+  position: fixed;
+  left: 0;
+  height: 100vh;
+  width: 2em;
+  border-right: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.7);
+  z-index: 10;
+}
+
+.sc-spine .se-logo {
+  transform: rotate(-90deg);
+  position: absolute;
+  bottom: 3em;
+  margin: 0.3em;
+}
+
+.sc-spine .se-logo .se-main-logo {
+  position: absolute;
+  font-size: 1em;
+  width: 7em;
+  line-height: 1.2em;
+}
+
+.sc-spine .se-slogan {
+  position: absolute;
+  font-size: 0.45em;
+  left: 16em;
+}
+
+.sc-spine .se-second-logo {
+  bottom: 0;
+  margin: 0.3em;
+  position: absolute;
+}
+
+.sc-spine .se-second-logo img {
+  height: 2em;
+}
+
+.sc-spine .se-menu {
+  transform: rotate(-90deg);
+  position: absolute;
+  top: 1em;
+  width: 10em;
+  left: -4em;
+  height: 2em;
+  line-height: 1.5em;
+  padding: 0;
+}
+
+.sc-spine .se-menu > .se-item {
+  display: inline-block;
+  text-transform: uppercase;
+  margin-right: 2em;
+  font-size: 0.5em;
+  line-height: 4em;
+}
+
+.sc-spine .se-menu > .se-item.se-search {
+  transform: rotate(90deg);
+}

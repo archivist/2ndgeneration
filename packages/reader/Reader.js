@@ -1,6 +1,7 @@
 import { ProseEditorPackage } from 'substance'
 import { ContainerEditor, Highlights, Layout, SplitPane, TextPropertyEditor } from 'substance'
 import { forEach, map, uniq } from 'lodash-es'
+import plyr from 'plyr'
 import ReaderContext from './ReaderContext'
 
 const { ProseEditor } = ProseEditorPackage
@@ -14,7 +15,9 @@ class Reader extends ProseEditor {
 
     this.handleActions({
       'showReferences': this._showReferences,
-      'showTopics': this._showTopics
+      'showTopics': this._showTopics,
+      'openVideo': this._openVideo,
+      'openImage': this._openImage
     })
   }
 
@@ -39,24 +42,81 @@ class Reader extends ProseEditor {
   render($$) {
     let el = $$('div').addClass('sc-reader')
     el.append(
-      $$(SplitPane, {splitType: 'vertical', sizeB: '30%'}).append(
-        this._renderMainSection($$),
-        this._renderContextSection($$)
+      $$(SplitPane, {splitType: 'vertical', sizeB: '70%'}).append(
+        this._renderContextSection($$),
+        this._renderMainSection($$)
       )
     )
     return el
   }
 
+  renderVideo($$) {
+    let player = $$('div').addClass('se-media')
+      .attr({'data-type': 'youtube', 'data-video-id': this.state.video})
+
+    let el = $$('div').addClass('se-video').append(
+      $$('div').addClass('se-close').append('×')
+        .on('click', this._openVideo.bind(this, undefined)),
+      player
+    )
+
+    setTimeout(()=>{
+      plyr.setup({autoplay: true})
+    }, 100)
+
+    return el
+  }
+
+  renderGallery($$) {
+    const respondent = this.editorSession.respondent
+    const archive = respondent.archive
+    const current = this.state.image
+    const index = Object.keys(archive).findIndex(item => {
+      return archive[item].file === current
+    })
+
+    let el = $$('div').addClass('se-gallery')
+      .append(
+        $$('div').addClass('se-close').append('×')
+          .on('click', this._openImage.bind(this, undefined)),
+        $$('div').addClass('se-prev').append('←')
+          .on('click', this._prevImage.bind(this)),
+        $$('div').addClass('se-next').append('→')
+          .on('click', this._nextImage.bind(this)),
+        $$('img').addClass('se-image')
+          .attr('src', '/media/' + this.state.image),
+        $$('div').addClass('se-caption').append(
+          $$('div').addClass('se-title').append(archive[index].title),
+          $$('div').addClass('se-description').html(archive[index].caption)
+        )
+      )
+
+    return el
+  }
+
   _renderContextSection($$) {
+    const respondent = this.editorSession.respondent
     let parent = this.getParent()
     return $$('div').addClass('se-context-section').append(
+      $$('div').addClass('se-cover-reflection').css('background-image', 'url(/media/' + respondent.person.cover + ')'),
       $$(ReaderContext, parent.props).ref('contextPanel')
     )
   }
 
   _renderMainSection($$) {
     let mainSection = $$('div').addClass('se-main-section')
-    mainSection.append(this._renderContentPanel($$))
+    mainSection.append(
+      this._renderContentPanel($$)
+    )
+
+    if(this.state.video) {
+      mainSection.append(this.renderVideo($$))
+    }
+
+    if(this.state.image) {
+      mainSection.append(this.renderGallery($$))
+    }
+
     return mainSection
   }
 
@@ -70,14 +130,14 @@ class Reader extends ProseEditor {
 
     let contentPanel = $$(ScrollPane, {
       scrollbarType: 'substance',
-      scrollbarPosition: 'left',
+      scrollbarPosition: 'right',
       highlights: this.contentHighlights
     }).ref('contentPanel')
 
     let layout = $$(Layout, {
       width: 'large'
     })
-    
+
     layout.append(
       $$(Brackets).ref('brackets'),
       $$(TextPropertyEditor, {
@@ -142,7 +202,7 @@ class Reader extends ProseEditor {
     let entityIndex = doc.getIndex('entities')
     let refs = entityIndex.get(entityId)
     // We are sorting references by paregraph position
-    // if nodes annotations are in same paragraph 
+    // if nodes annotations are in same paragraph
     // we will sort them by start offset
     let refIds = Object.keys(refs)
     let ordered = refIds.sort((a,b) => {
@@ -185,6 +245,37 @@ class Reader extends ProseEditor {
       this.refs.brackets.highlight(topics)
       this.highlightReferences(topics, true)
     }.bind(this), 10)
+  }
+
+
+  _openVideo(videoId) {
+    this.extendState({video: videoId, image: undefined})
+  }
+
+  _openImage(image) {
+    this.extendState({image: image, video: undefined})
+  }
+
+  _prevImage() {
+    const respondent = this.editorSession.respondent
+    const archive = respondent.archive
+    const current = this.state.image
+    const index = Object.keys(archive).findIndex(item => {
+      return archive[item].file === current
+    })
+    const prev = index > 0 ? archive[index - 1].file : archive[archive.length - 1].file
+    this.extendState({image: prev})
+  }
+
+  _nextImage() {
+    const respondent = this.editorSession.respondent
+    const archive = respondent.archive
+    const current = this.state.image
+    const index = Object.keys(archive).findIndex(item => {
+      return archive[item].file === current
+    })
+    const next = index < archive.length - 1 ? archive[index + 1].file : archive[0].file
+    this.extendState({image: next})
   }
 
 }

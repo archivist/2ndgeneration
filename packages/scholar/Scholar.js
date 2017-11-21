@@ -61,10 +61,9 @@ class Scholar extends AbstractApplication {
 
   getRouter() {
     return new ScholarRouter(this, {
-      'documents': 'documentId',
+      'document': 'documentId',
       'resources': 'resourceId',
-      'persons': 'resourceId',
-      'maps': 'resourceId'
+      'person': 'personId'
     });
   }
 
@@ -75,7 +74,6 @@ class Scholar extends AbstractApplication {
   _getPageProps() {
     let props = cloneDeep(this.state.route)
     delete props.page
-    props.preview = true
     props.mobile = this.state.mobile
     return props
   }
