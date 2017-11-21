@@ -4,6 +4,8 @@
 @import '../../packages/explorer/_index.css';
 @import '../../packages/reader/_index.css';
 @import '../../packages/person/_index.css';
+@import '../../packages/toponym/_index.css';
+@import '../../packages/commentary/_index.css';
 @import '../../packages/subject/_index.css';
 @import '../../packages/info-context/_index.css';
 @import '../../packages/resources-context/_index.css';
@@ -25,6 +27,7 @@ body {
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: rgba(0,0,0,0.75);
   font-family: 'Oswald', sans-serif;
 }
 
@@ -33,6 +36,19 @@ p {
   line-height: 1.7em;
   margin-bottom: 1em;
   font-weight: 500;
+}
+
+a {
+  color: #1795CD;
+  text-decoration:none;
+}
+
+a:focus {
+  outline: 1px solid transparent;
+}
+
+button:focus {
+  outline: 1px solid transparent;
 }
 
 *, *:after, *:before {

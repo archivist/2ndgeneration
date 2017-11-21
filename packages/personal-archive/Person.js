@@ -44,7 +44,7 @@ class Person extends Component {
             .append(
               $$('div').addClass('se-title').append(person.name),
               $$('div').addClass('se-photo-inline').append(
-                $$('img').attr('src', '/media/s200/' + person.photo)
+                $$('img').attr('src', '/media/s400/' + person.photo)
               ),
               $$('div').addClass('se-bio').html(person.bio)
             ),
@@ -77,7 +77,7 @@ class Person extends Component {
       const cover = story.cover || person.photo
       const item = $$('div').addClass('se-item').append(
         $$('div').addClass('se-video-cover')
-          .css('background-image', 'url(/media/s200/' + cover + ')'),
+          .css('background-image', 'url(/media/s400/' + cover + ')'),
         $$('div').addClass('se-video-abstract').html(story.abstract)
       ).on('click', this._openVideo.bind(this, story.source)).ref(story.source)
 

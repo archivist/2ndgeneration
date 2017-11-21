@@ -59,7 +59,10 @@ class ReaderLayout extends Component {
     let main = $$(Layout, {
       width: 'medium',
       textAlign: 'center'
-    }).append($$(Spinner, {message: 'spinner-loading'}))
+    }).addClass('se-loading').append(
+      $$('div').addClass('se-cover'),
+      $$(Spinner, {message: 'spinner-loading'})
+    )
 
     this._updateLayout()
 

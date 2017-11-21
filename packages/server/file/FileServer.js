@@ -1,4 +1,6 @@
+let fs = require('fs')
 let sharp = require('sharp')
+let Promise = require('bluebird')
 let Err = require('substance').SubstanceError
 
 /*
@@ -12,6 +14,7 @@ class FileServer {
   }
 
   bind(app) {
+    //app.get(this.path + '/rebuild', this._rebuildThumbs.bind(this))
     app.post(this.path, this.authEngine.hasAccess.bind(this.authEngine), this._uploadFile.bind(this))
     app.delete(this.path + '/:id', this.authEngine.hasAccess.bind(this.authEngine), this._removeFile.bind(this))
   }
@@ -30,10 +33,36 @@ class FileServer {
           this._resize400(req)
         ]).then(() => {
           res.json({name: this.store.getFileName(req)})
+        }).catch(function(err) {
+          return next(err)
         })
       } else {
         res.json({name: this.store.getFileName(req)})
       }
+    })
+  }
+
+  _rebuildThumbs(req, res, next) {
+    fs.readdir('./media/', (err, files) => {
+      if(err) return next(err)
+      Promise.map(files, file => {
+        const isFile = fs.lstatSync('./media/' + file).isFile()
+        if(isFile) {
+          const opt = {
+            file: {
+              destination: './media/',
+              filename: file,
+              path: './media/' + file
+            }
+          }
+          return Promise.all([
+            this._resize200(opt),
+            this._resize400(opt)
+          ])
+        } else {
+          return false
+        }
+      })
     })
   }
 

@@ -13,6 +13,7 @@
   position: absolute;
   bottom: 3em;
   margin: 0.3em;
+  color: inherit;
 }
 
 .sc-spine .se-logo .se-main-logo {
@@ -41,7 +42,7 @@
 .sc-spine .se-menu {
   transform: rotate(-90deg);
   position: absolute;
-  top: 1em;
+  top: 1.5em;
   width: 10em;
   left: -4em;
   height: 2em;
@@ -52,11 +53,17 @@
 .sc-spine .se-menu > .se-item {
   display: inline-block;
   text-transform: uppercase;
-  margin-right: 2em;
+  margin: 0em 1em;
   font-size: 0.5em;
   line-height: 4em;
 }
 
+.sc-spine .se-menu > .se-item > a {
+  color: inherit;
+}
+
 .sc-spine .se-menu > .se-item.se-search {
   transform: rotate(90deg);
+  padding: 1em;
+  margin: 0em;
 }

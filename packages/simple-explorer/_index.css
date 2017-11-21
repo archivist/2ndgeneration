@@ -6,7 +6,7 @@
   left: 0;
   background-size: cover;
   background-attachment: fixed;
-  background-image: url(assets/cover.jpg);
+  background-image: url(/assets/cover.jpg);
 }
 
 .sc-explorer .se-person-list {

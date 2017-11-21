@@ -42,3 +42,9 @@
 .sc-entity-entry.se-person .se-person-link {
   right: 20px;
 }
+
+.sc-reader .se-entity-entries .sc-entity-entry.se-person.se-active,
+.sc-reader .se-entity-entries .sc-entity-entry.se-person.se-active:hover {
+  border-left: 2px solid rgba(11, 157, 217, 0.7);
+  background: rgba(12, 157, 218, 0.1);
+}

@@ -14,7 +14,7 @@ class Menu extends Component {
   }
 
   renderLogo($$) {
-    return $$('div').addClass('se-logo')
+    return $$('a').addClass('se-logo').attr('href','/')
       .append(
         $$('div').addClass('se-main-logo').append(
           'Люди и судьбы'
@@ -26,29 +26,35 @@ class Menu extends Component {
   }
 
   renderSecondLogo($$) {
-    return $$('div').addClass('se-second-logo')
+    return $$('a').addClass('se-second-logo').attr({href:'http://iofe.center/',target:'_blank'})
       .append(
         $$('img').attr('src', '/assets/iofe-logo.png')
       )
   }
 
   renderMenu($$) {
-    let items = [{id: 'archive', name: 'архив'}, {id: 'collections', name: 'коллекции'}]
+    let items = [{id: 'archive', name: 'архив', url: '/'}, {id: 'collections', name: 'коллекции', url: '/'}]
     let el = $$('ul').addClass('se-menu')
 
     items.forEach(item => {
       el.append(
-        $$('li').addClass('se-item').append(item.name)
+        $$('li').addClass('se-item').append(
+          $$('a').attr('href',item.url).append(item.name)
+        )
       )
     })
 
     el.append(
       $$('li').addClass('se-item se-search').append(
         $$('i').addClass('fa fa-search')
-      )
+      ).on('click', this._onSearch)
     )
 
     return el
+  }
+
+  _onSearch() {
+    this.send('search')
   }
 }
 

@@ -41,15 +41,30 @@ class FileStore {
     return req.file.filename
   }
 
-  deleteFile(fileName, cb) {
-    let path = destination + '/' + fileName
-    let thumbPath = destination + '/s200/' + fileName
-    return fs.unlink(path, err => {
-      fs.exists(thumbPath, (exists) => {
-        if (exists) return fs.unlink(thumbPath, cb)
-        return cb(err)
+  deleteThumbs(sizes, file, cb) {
+    let i = sizes.length
+    sizes.forEach(size => {
+      const thumbPath = destination + '/' + size + '/' + file
+      fs.exists(thumbPath, exists => {
+        let callback = function(err) {
+          i--
+          if (err) {
+            cb(err)
+            return
+          } else if (i <= 0) {
+            cb(null)
+          }
+        }
+        if (exists) {
+          return fs.unlink(thumbPath, callback)
+        }
+        return callback()
       })
     })
+  }
+
+  deleteFile(fileName, cb) {
+    return this.deleteThumbs(['s200', 's400'], fileName, cb)
   }
 }
 

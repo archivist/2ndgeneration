@@ -42,3 +42,9 @@
 .sc-entity-entry.se-toponym .se-toponym-link {
   right: 20px;
 }
+
+.sc-reader .se-entity-entries .sc-entity-entry.se-toponym.se-active,
+.sc-reader .se-entity-entries .sc-entity-entry.se-toponym.se-active:hover {
+  border-left: 2px solid rgba(240, 95, 50, 0.7);
+  background: rgba(240, 95, 50, 0.05);
+}

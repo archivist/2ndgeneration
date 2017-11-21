@@ -42,3 +42,9 @@
 .sc-entity-entry.se-commentary .se-commentary-link {
   right: 20px;
 }
+
+.sc-reader .se-entity-entries .sc-entity-entry.se-commentary.se-active,
+.sc-reader .se-entity-entries .sc-entity-entry.se-commentary.se-active:hover {
+  border-left: 2px solid rgba(147, 217, 11, 0.7);
+  background: rgba(147, 217, 11, 0.05);
+}

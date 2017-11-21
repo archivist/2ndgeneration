@@ -8,7 +8,7 @@ import ReaderPackage from '../../packages/reader/package'
 import InterviewPackage from '../../packages/interview/package'
 import SourceContextPackage from '../../packages/source-context/package'
 import ResourcesContextPackage from '../../packages/resources-context/package'
-// import SubjectsContextPackage from '../../packages/subjects-context/package'
+import SubjectsContextPackage from '../../packages/subjects-context/package'
 // import InfoContextPackage from '../../packages/info-context/package'
 import RespondentContextPackage from '../../packages/respondent-context/package'
 import ScholarSubConfigurator from '../../packages/scholar/ScholarSubConfigurator'
@@ -39,7 +39,7 @@ export default {
     ReaderConfigurator.import(ReaderPackage)
     ReaderConfigurator.import(InterviewPackage)
     ReaderConfigurator.import(SourceContextPackage)
-    // ReaderConfigurator.import(SubjectsContextPackage)
+    ReaderConfigurator.import(SubjectsContextPackage)
     ReaderConfigurator.import(ResourcesContextPackage)
     ReaderConfigurator.import(RespondentContextPackage)
     // ReaderConfigurator.import(InfoContextPackage)
