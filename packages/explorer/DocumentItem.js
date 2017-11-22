@@ -11,7 +11,7 @@ class DocumentItem extends Component {
     let meta = item.meta
     let index = this.props.index
     let config = this.context.config
-    
+
     let urlHelper = this.context.urlHelper
     let url = urlHelper.openDocument(item.documentId)
     if(this.props.resource) url = urlHelper.openDocument(item.documentId, this.props.resource)
@@ -19,7 +19,7 @@ class DocumentItem extends Component {
     let title = $$('a')
       .addClass('se-document-title')
       .attr({href: url, target: '_blank'})
-      .append(item.title)
+      .append(meta.short_summary)
 
     // Photo badge
     let photo = config.mediaServer + '/photos/' + meta.interviewee_photo
@@ -28,12 +28,9 @@ class DocumentItem extends Component {
     photoEl.css({'background-image': 'url(' + photo + ')'})
 
     let el = $$('div').addClass('sc-document-item se-row').append(
-      $$(Grid.Cell, {columns: 2}).addClass('se-photo').append(photoEl),
-      $$(Grid.Cell, {columns: 10}).addClass('se-metadata').append(
+      $$(Grid.Cell, {columns: 12}).addClass('se-metadata').append(
         this.renderMetaInfo($$),
-        title,
-        meta.short_summary,
-        this.renderTopicBadges($$)
+        title
       )
     )
     if(this.props.resource) {
@@ -110,7 +107,7 @@ class DocumentItem extends Component {
             .append(
               this.renderIcon($$, 'topic-badge'),
               name + ' (' + counter + ')'
-            ) 
+            )
         )
       })
     }

@@ -31,7 +31,8 @@ class Scholar extends AbstractApplication {
       'navigate': this.navigate,
       'home': this._home,
       'changeLanguage': this._changeLanguage,
-      'search': this._onSearch
+      'search': this._onSearch,
+      'toggle-search': this._onSearch
     })
   }
 
@@ -46,6 +47,9 @@ class Scholar extends AbstractApplication {
       iconProvider: this.iconProvider,
       labelProvider: this.labelProvider
     }
+  }
+
+  willUpdateState(newState) {
   }
 
   navigate(route, opts) {
@@ -68,27 +72,27 @@ class Scholar extends AbstractApplication {
     });
   }
 
-  // render($$) {
-  //   let el = $$('div').addClass('sc-responsive-application')
-  //
-  //   if (this.state.route === undefined) {
-  //     // Not yet initialized by router
-  //     return el
-  //   }
-  //
-  //   if(this.state.search) {
-  //     let Explorer = this.componentRegistry.get('search-explorer')
-  //     el.append(
-  //       $$(Explorer, {})
-  //     )
-  //   }
-  //
-  //   el.append(
-  //     this.renderPage($$)
-  //   )
-  //
-  //   return el
-  // }
+  render($$) {
+    let el = $$('div').addClass('sc-responsive-application')
+
+    if (this.state.route === undefined) {
+      // Not yet initialized by router
+      return el
+    }
+
+    if(this.state.search) {
+      let Explorer = this.componentRegistry.get('search-explorer')
+      el.append(
+        $$(Explorer, {})
+      )
+    }
+
+    el.append(
+      this.renderPage($$)
+    )
+
+    return el
+  }
 
   _getSubjects() {
     return this.subjects
@@ -115,7 +119,7 @@ class Scholar extends AbstractApplication {
 
   _onSearch() {
     const search = this.state.search
-    this.extendState({search: !search})
+    this.extendState({search: !search, route: this.router.readRoute()})
   }
 
 }

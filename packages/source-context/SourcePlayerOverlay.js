@@ -4,6 +4,11 @@ import plyr from 'plyr'
 class SourcePlayerOverlay extends Component {
 
   didMount() {
+    let currentContext = this.props.currentContext
+    let boundContext = this.props.boundContext
+    if(currentContext !== boundContext) {
+      this._hidePlayer()
+    }
     // recalculate width when window gets resized
     DefaultDOMElement.getBrowserWindow().on('resize', this._updateWidth, this)
 

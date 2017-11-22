@@ -193,16 +193,19 @@
 }
 
 .sc-person > .se-content .se-stories .se-videos > .se-item {
-  width: 9em;
+  flex: 1 1 0;
+  min-width: 7em;
   margin-bottom: 2em;
   cursor: pointer;
+  margin: 0.5em;
 }
 
 .sc-person > .se-content .se-stories .se-video-cover {
   position: relative;
   height: 6em;
-  width: 9em;
+  width: 100%;
   background-size: cover;
+  background-position: center;
   border-radius: 0.3em;
   z-index: 10;
 }

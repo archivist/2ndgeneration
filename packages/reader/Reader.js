@@ -42,7 +42,7 @@ class Reader extends ProseEditor {
   render($$) {
     let el = $$('div').addClass('sc-reader')
     el.append(
-      $$(SplitPane, {splitType: 'vertical', sizeB: '70%'}).append(
+      $$(SplitPane, {splitType: 'vertical', sizeA: '30%'}).append(
         this._renderContextSection($$),
         this._renderMainSection($$)
       )

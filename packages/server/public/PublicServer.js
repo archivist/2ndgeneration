@@ -26,7 +26,8 @@ class PublicServer {
   _listRespondents(req, res, next) {
     let args = req.query
     args.filters = JSON.stringify({
-      'entityType': 'respondent'
+      'entityType': 'respondent',
+      'data->>\'published\'': true
     })
     args.options = JSON.stringify({
       columns: ['"entityId"', "name", "data->>'annotation' AS annotation", "data->>'photo' AS photo"]

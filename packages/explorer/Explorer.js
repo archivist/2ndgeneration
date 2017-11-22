@@ -23,8 +23,8 @@ class Explorer extends Component {
   }
 
   didMount() {
-    this._loadData()
-    this._loadTopics()
+    //this._loadData()
+    //this._loadTopics()
   }
 
   willUpdateState(state) {
@@ -33,9 +33,9 @@ class Explorer extends Component {
 
     if(!isEqual(oldFilters, newFilters) || !isEqual(this.state.search, state.search)) {
       this.searchData(state)
-      this.searchResources(state.search)
-      this.searchTopics(state.search)
-      this._loadTopics(newFilters, state.search)
+      // this.searchResources(state.search)
+      // this.searchTopics(state.search)
+      // this._loadTopics(newFilters, state.search)
     }
 
     if(!this.state.topics && state.topics) {
@@ -77,7 +77,7 @@ class Explorer extends Component {
     let Layout = this.getComponent('layout')
 
     let documentItems = this.state.items
-    let el = $$('div').addClass('sc-explorer')
+    let el = $$('div').addClass('sc-search-explorer')
 
     if (!documentItems) {
       return el
@@ -89,19 +89,25 @@ class Explorer extends Component {
     //el.append($$(Header))
 
     let layout = $$(Layout, {
-      width: 'full',
+      width: 'medium',
       textAlign: 'left'
     }).addClass('se-explorer-layout')
 
     layout.append(
+      $$('div').addClass('se-close').append('×')
+        .on('click', this._onClose.bind(this)),
       $$(SearchBar, {value: this.state.search}),
-      $$(SplitPane, {splitType: 'vertical', sizeB: '30%'}).addClass('se-results-pane').append(
-        this.renderMainSection($$),
-        this.renderSidebarSection($$)
-      )
+      this.renderMainSection($$),
+      this.renderSidebarSection($$)
     )
 
     el.append(layout)
+
+    // el.append(
+    //   $$(SearchBar, {value: this.state.search}),
+    //   this.renderMainSection($$),
+    //   this.renderSidebarSection($$)
+    // )
 
     return el
   }
@@ -119,7 +125,7 @@ class Explorer extends Component {
     let el = $$('div').addClass('se-sidebar')
     let ResourceEntries = this.getComponent('resource-entries')
     let TopicEntries = this.getComponent('topic-entries')
-    let MetaFilters = this.getComponent('meta-filters')
+    //let MetaFilters = this.getComponent('meta-filters')
     let Facets = this.getComponent('facets')
 
     if(this.state.total) {
@@ -137,7 +143,7 @@ class Explorer extends Component {
 
     el.append(
       $$(Facets, {topics: this.state.topics}).ref('facets'),
-      $$(MetaFilters, {filters: this.state.metaFilters}).ref('filters')
+      //$$(MetaFilters, {filters: this.state.metaFilters}).ref('filters')
     )
 
     return el
@@ -149,7 +155,7 @@ class Explorer extends Component {
     let layout = $$(Layout, {
       width: 'medium',
       textAlign: 'center'
-    })
+    }).addClass('se-empty-set')
 
     if(this.state.total === 0) {
       layout.append(
@@ -157,18 +163,7 @@ class Explorer extends Component {
         $$('p').append(this.getLabel('no-results-info'))
       )
     } else {
-      layout.append(
-        $$('div').addClass('se-spinner').append(
-          $$('div').addClass('se-rect1'),
-          $$('div').addClass('se-rect2'),
-          $$('div').addClass('se-rect3'),
-          $$('div').addClass('se-rect4'),
-          $$('div').addClass('se-rect5')
-        ),
-        $$('h2').html(
-          'Loading...'
-        )
-      )
+
     }
 
     return layout;
@@ -183,7 +178,7 @@ class Explorer extends Component {
     let DocumentItem = this.getComponent('document-item')
     let Pager = this.getComponent('pager')
     let ResourceReference = this.getComponent('resource-reference')
-    let grid = $$(Grid)
+    let grid = $$(Grid).addClass('se-full-set')
 
     if(resource) {
       return $$(ResourceReference, {resource: resource})
@@ -513,6 +508,10 @@ class Explorer extends Component {
     this.refs.total.el.setInnerHTML(
       this.getLabel('total-results') + ': ' + total
     )
+  }
+
+  _onClose() {
+    this.send('toggle-search')
   }
 }
 
