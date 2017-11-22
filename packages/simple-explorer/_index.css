@@ -31,10 +31,16 @@
 }
 
 .sc-explorer .se-person-list .se-item {
-  width: 9em;
+  flex: 1 1 0;
+  min-width: 7em;
   margin-bottom: 2em;
+  margin: 0.5em;
   color: rgba(255, 255, 255, 0.75);
   cursor: pointer;
+}
+
+.sc-explorer .se-person-list img {
+  width: 100%;
 }
 
 .sc-explorer .se-person-list .se-item .se-name {
