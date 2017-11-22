@@ -4,10 +4,10 @@ export default {
   name: 'archivist-reader-subjects',
   configure: function(config) {
     config.addContext('subjects', SubjectsContext, false)
-    config.addIcon('subjects', {'fontawesome': 'fa-map-signs'})
+    config.addIcon('subjects', {'fontawesome': 'fa-tags'})
     config.addLabel('subjects', {
       en: 'Subjects',
-      ru: 'Путеводитель'
+      ru: 'Темы'
     })
   }
 }

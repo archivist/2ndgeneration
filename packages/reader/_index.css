@@ -144,6 +144,10 @@
   cursor: pointer;
 }
 
+.sc-reader .se-main-section .se-video .se-close {
+  color: #6b6b6b;
+}
+
 .sc-reader .se-main-section .se-gallery .se-close {
   top: 0em;
   right: 0em;

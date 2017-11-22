@@ -7,7 +7,7 @@ export default {
     config.addIcon('respondent-context', {'fontawesome': 'fa-user'})
     config.addLabel('respondent-context', {
       en: 'Respondent',
-      ru: 'Респондент'
+      ru: 'О респонденте'
     })
   }
 }
