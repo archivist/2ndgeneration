@@ -125,7 +125,8 @@ export default {
     config.setAppConfig({
       protocol: appConfig.protocol,
       host: appConfig.host,
-      port: appConfig.port
+      port: appConfig.port,
+      wsUrl: appConfig.wsUrl
     })
 
     // Define Authentication Client
