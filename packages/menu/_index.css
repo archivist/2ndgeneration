@@ -8,6 +8,11 @@
   z-index: 10;
 }
 
+.sc-spine.sm-white {
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+}
+
 .sc-spine .se-logo {
   transform: rotate(-90deg);
   position: absolute;

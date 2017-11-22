@@ -31,12 +31,9 @@ class Document extends Component {
 
   render($$) {
     const Menu = this.getComponent('menu')
-    const Spinner = this.getComponent('spinner')
-
-    let person = this.state.person
 
     let el = $$('div').addClass('sc-document').append(
-      $$(Menu, {active: 'archive'})
+      $$(Menu, {active: 'archive', mode: 'white'})
     )
 
     const configurator = this.getChildConfigurator('archivist-interview-reader')
@@ -48,38 +45,6 @@ class Document extends Component {
     el.append(
       $$(Reader, props).ref('reader')
     )
-
-    // if(person.name) {
-    //   el.append(
-    //     $$('div').addClass('se-cover')
-    //       .css('background-image', 'url(/media/' + person.cover + ')'),
-    //     $$('div').addClass('se-cover-reflection')
-    //       .css('background-image', 'url(/media/' + person.cover + ')'),
-    //     $$('div').addClass('se-content').append(
-    //       $$('section').addClass('se-biography sm-content-section')
-    //         .append(
-    //           $$('div').addClass('se-title').append(person.name),
-    //           $$('div').addClass('se-photo-inline').append(
-    //             $$('img').attr('src', '/media/' + person.photo)
-    //           ),
-    //           $$('div').addClass('se-bio').html(person.bio)
-    //         ),
-    //       this.renderStories($$),
-    //       this.renderInterviews($$),
-    //       this.renderArchive($$)
-    //     ).ref('content')
-    //   )
-    //
-    //   if(this.state.video) {
-    //     el.append(this.renderVideo($$))
-    //   }
-    //
-    //   if(this.state.image) {
-    //     el.append(this.renderGallery($$))
-    //   }
-    // } else {
-    //   el.append($$(Spinner, {message: 'spinner-loading'}))
-    // }
 
     return el
   }

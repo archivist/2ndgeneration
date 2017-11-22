@@ -10,7 +10,7 @@ import Facets from './Facets'
 export default {
   name: 'archivist-explorer',
   configure: function(config) {
-    config.addPage('explorer', Explorer)
+    config.addComponent('search-explorer', Explorer)
     config.addPage('resources', Explorer)
     config.addComponent('searchbar', SearchBar)
     config.addComponent('document-item', DocumentItem)

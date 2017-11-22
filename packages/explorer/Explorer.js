@@ -83,10 +83,10 @@ class Explorer extends Component {
       return el
     }
 
-    let Header = this.getComponent('header')
+    //let Header = this.getComponent('header')
     let SearchBar = this.getComponent('searchbar')
 
-    el.append($$(Header))
+    //el.append($$(Header))
 
     let layout = $$(Layout, {
       width: 'full',
@@ -134,7 +134,7 @@ class Explorer extends Component {
       if(!isEmpty(this.state.foundTopics)) el.append($$(TopicEntries, {entries: this.state.foundTopics}))
       if(!isEmpty(this.state.entries)) el.append($$(ResourceEntries, {entries: this.state.entries}))
     }
-    
+
     el.append(
       $$(Facets, {topics: this.state.topics}).ref('facets'),
       $$(MetaFilters, {filters: this.state.metaFilters}).ref('filters')
@@ -176,7 +176,7 @@ class Explorer extends Component {
 
   renderFull($$) {
     let Grid = this.getComponent('grid')
-    
+
     let items = this.state.items
     let total = this.state.total
     let resource = this.state.resource
@@ -225,7 +225,7 @@ class Explorer extends Component {
     let perPage = this.state.perPage
     let pagination = this.state.pagination
     let options = {
-      limit: perPage, 
+      limit: perPage,
       offset: pagination ? this.state.items.length : 0
     }
     let items = []
@@ -302,7 +302,7 @@ class Explorer extends Component {
     let perPage = this.state.perPage
     let options = {
       order: this.state.order,
-      limit: perPage, 
+      limit: perPage,
       offset: pagination ? this.state.items.length : 0
     }
     let items = []
@@ -355,7 +355,7 @@ class Explorer extends Component {
 
         this.extendState({
           items: items,
-          details: index 
+          details: index
         })
       }.bind(this))
     } else {
@@ -369,7 +369,7 @@ class Explorer extends Component {
     let configurator = mainConfigurator.getConfigurator('archivist-subjects')
     let filters = newFilters || this.state.filters
     let facets = filters.topics
-    let searchValue = search 
+    let searchValue = search
     if(isUndefined(search)) searchValue = this.state.search
     let language = 'russian'
     if(searchValue) {

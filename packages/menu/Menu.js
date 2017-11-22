@@ -2,7 +2,11 @@ import { Component } from 'substance'
 
 class Menu extends Component {
   render($$) {
+    const mode = this.props.mode
+
     let el = $$('div').addClass('sc-spine')
+
+    if(mode) el.addClass('sm-' + mode)
 
     el.append(
       this.renderSecondLogo($$),
@@ -26,9 +30,10 @@ class Menu extends Component {
   }
 
   renderSecondLogo($$) {
+    const logoPath = this.props.mode === 'white' ? '/assets/iofe-logo-wh.png' : '/assets/iofe-logo.png'
     return $$('a').addClass('se-second-logo').attr({href:'http://iofe.center/',target:'_blank'})
       .append(
-        $$('img').attr('src', '/assets/iofe-logo.png')
+        $$('img').attr('src', logoPath)
       )
   }
 

@@ -84,8 +84,7 @@
 }
 
 .sc-reader .se-context-section > .sc-context-panel > .sc-tabbed-pane {
-  background: rgba(50,50,51,0.7);
-  color: #fff;
+  background: rgba(255,255,255,0.7);
 }
 
 .sc-reader .se-context-section > .sc-context-panel > .sc-tabbed-pane .se-tabs {

@@ -224,8 +224,13 @@
   opacity: 0.7;
 }
 
+.sc-person > .se-content .se-stories .se-video-title {
+  font-size: 0.7em;
+  line-height: 1.2em;
+  margin: 0.5em 0em;
+}
+
 .sc-person > .se-content .se-stories .se-video-abstract {
-  margin-top: 1.2em;
   line-height: 1.4em;
   font-size: 0.8em;
 }

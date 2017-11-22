@@ -39,12 +39,18 @@ class Explorer extends Component {
     items.forEach(item => {
       const itemUrl = urlHelper.openPerson(item.entityId)
       list.append(
-        $$('a').addClass('se-item').append(item.name)
-          .attr('href', itemUrl)
+        $$('a').addClass('se-item').attr('href', itemUrl)
+          .append(
+            $$('img').addClass('se-photo').attr('src', '/media/s200/' + item.photo),
+            $$('div').addClass('se-name').append(item.name),
+            $$('div').addClass('se-annotation').html(item.annotation)
+          )
       )
     })
 
-    el.append(list)
+    el.append(
+      $$('div').addClass('se-persons').append(list)
+    )
 
     return el
   }

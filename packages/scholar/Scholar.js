@@ -30,7 +30,8 @@ class Scholar extends AbstractApplication {
     this.handleActions({
       'navigate': this.navigate,
       'home': this._home,
-      'changeLanguage': this._changeLanguage
+      'changeLanguage': this._changeLanguage,
+      'search': this._onSearch
     })
   }
 
@@ -67,6 +68,28 @@ class Scholar extends AbstractApplication {
     });
   }
 
+  // render($$) {
+  //   let el = $$('div').addClass('sc-responsive-application')
+  //
+  //   if (this.state.route === undefined) {
+  //     // Not yet initialized by router
+  //     return el
+  //   }
+  //
+  //   if(this.state.search) {
+  //     let Explorer = this.componentRegistry.get('search-explorer')
+  //     el.append(
+  //       $$(Explorer, {})
+  //     )
+  //   }
+  //
+  //   el.append(
+  //     this.renderPage($$)
+  //   )
+  //
+  //   return el
+  // }
+
   _getSubjects() {
     return this.subjects
   }
@@ -88,6 +111,11 @@ class Scholar extends AbstractApplication {
     this.configurator.setDefaultLanguage(lang)
     this.labelProvider = this.configurator.getLabelProvider()
     this.rerender()
+  }
+
+  _onSearch() {
+    const search = this.state.search
+    this.extendState({search: !search})
   }
 
 }

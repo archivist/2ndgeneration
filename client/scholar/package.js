@@ -3,6 +3,7 @@ import ScholarPackage from '../../packages/scholar/package'
 import MenuPackage from '../../packages/menu/package'
 import PersonalArchive from '../../packages/personal-archive/package'
 import ExplorerPackage from '../../packages/simple-explorer/package'
+import SearchExplorerPackage from '../../packages/explorer/package'
 import SubjectsPackage from '../../packages/subjects/package'
 import ReaderPackage from '../../packages/reader/package'
 import InterviewPackage from '../../packages/interview/package'
@@ -30,6 +31,7 @@ export default {
     config.import(MenuPackage)
     config.import(PersonalArchive)
     config.import(ExplorerPackage)
+    config.import(SearchExplorerPackage)
     config.setDefaultLanguage(appConfig.defaultLanguage)
 
 

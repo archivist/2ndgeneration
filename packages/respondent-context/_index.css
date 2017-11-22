@@ -31,10 +31,10 @@
 .sc-respondent > .se-content .se-section-title {
   font-family: 'Roboto', sans-serif;
   text-transform: uppercase;
-  color: #c2c2c2;
+  color: inherit;
   font-size: 0.6em;
   margin-bottom: 2em;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding-bottom: 0.3em;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .sc-respondent > .se-content .se-biography .se-title {
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin-bottom: 1em;
   padding-bottom: 0.1em;
   font-size: 2em;
@@ -55,7 +55,6 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  color: #fff;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -91,8 +90,13 @@
   opacity: 0.7;
 }
 
+.sc-respondent > .se-content .se-stories .se-video-title {
+  font-size: 0.7em;
+  line-height: 1.2em;
+  margin: 0.5em 0em;
+}
+
 .sc-respondent > .se-content .se-stories .se-video-abstract {
-  margin-top: 1.2em;
   line-height: 1.4em;
   font-size: 0.8em;
 }
@@ -101,8 +105,8 @@
   display: block;
   position: relative;
   font-size: 0.5em;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  color: inherit;
   margin-bottom: 1em;
   border-radius: 0.3em;
   height: 6em;
@@ -152,7 +156,7 @@
   margin-bottom: 0.5em;
   font-weight: 500;
   font-size: 1.2em;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -170,8 +174,7 @@
   position: relative;
   display: flex;
   font-size: 0.5em;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.5);
   margin-bottom: 1em;
   border-radius: 0.3em;
   height: 4em;
@@ -210,7 +213,7 @@
 }
 
 .sc-document .sc-reader > .sc-split-pane {
-  left: 50px;
+  left: 2em;
 }
 
 .sc-document .sc-reader .se-context-section {

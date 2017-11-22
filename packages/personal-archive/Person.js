@@ -78,6 +78,7 @@ class Person extends Component {
       const item = $$('div').addClass('se-item').append(
         $$('div').addClass('se-video-cover')
           .css('background-image', 'url(/media/s400/' + cover + ')'),
+        $$('div').addClass('se-video-title').html(story.title),
         $$('div').addClass('se-video-abstract').html(story.abstract)
       ).on('click', this._openVideo.bind(this, story.source)).ref(story.source)
 

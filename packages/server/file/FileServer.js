@@ -14,7 +14,7 @@ class FileServer {
   }
 
   bind(app) {
-    //app.get(this.path + '/rebuild', this._rebuildThumbs.bind(this))
+    app.get(this.path + '/rebuild', this._rebuildThumbs.bind(this))
     app.post(this.path, this.authEngine.hasAccess.bind(this.authEngine), this._uploadFile.bind(this))
     app.delete(this.path + '/:id', this.authEngine.hasAccess.bind(this.authEngine), this._removeFile.bind(this))
   }

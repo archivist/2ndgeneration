@@ -29,7 +29,7 @@ class PublicServer {
       'entityType': 'respondent'
     })
     args.options = JSON.stringify({
-      columns: ['"entityId"', "name"]
+      columns: ['"entityId"', "name", "data->>'annotation' AS annotation", "data->>'photo' AS photo"]
     })
 
     this.engine.listEntities(args)
