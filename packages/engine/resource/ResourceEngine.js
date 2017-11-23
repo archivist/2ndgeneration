@@ -156,7 +156,7 @@ class ResourceEngine extends ArchivistResourceEngine {
       FROM entities
       WHERE "entityType" = 'person'
       AND entities.data->'global' = 'true' ${letterCondition}
-      AND (SELECT COUNT(*) FROM documents WHERE "references" ? "entityId") > 0
+      AND (SELECT COUNT(*) FROM documents WHERE "references" ? "entityId" AND meta->>'state' = 'published') > 0
       ORDER BY name ASC
       LIMIT ${limit} OFFSET ${offset}
     `
