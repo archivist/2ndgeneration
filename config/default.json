@@ -6,7 +6,7 @@
     "appUrl": "http://localhost:5000",
     "botToken": "d41d8cd98f00b204e9800998ecf8427e",
     "publisherEndpoint": "/publisher",
-    "scholarEndpoint": ["/document/:id", "/person/:id", "/"],
+    "scholarEndpoint": ["/document/:id", "/person/:id", "/persons", "/"],
     "mediaEndpoint": "./media"
   },
   "app": {

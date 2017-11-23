@@ -10,6 +10,7 @@ import InterviewPackage from '../../packages/interview/package'
 import SourceContextPackage from '../../packages/source-context/package'
 import ResourcesContextPackage from '../../packages/resources-context/package'
 import SubjectsContextPackage from '../../packages/subjects-context/package'
+import PersonIndexPackage from '../../packages/person-index/package'
 // import InfoContextPackage from '../../packages/info-context/package'
 import RespondentContextPackage from '../../packages/respondent-context/package'
 import ScholarSubConfigurator from '../../packages/scholar/ScholarSubConfigurator'
@@ -30,6 +31,7 @@ export default {
     config.import(ScholarPackage)
     config.import(MenuPackage)
     config.import(PersonalArchive)
+    config.import(PersonIndexPackage)
     config.import(ExplorerPackage)
     config.import(SearchExplorerPackage)
     config.setDefaultLanguage(appConfig.defaultLanguage)

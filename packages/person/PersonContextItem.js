@@ -58,9 +58,9 @@ class PersonContextItem extends Component {
       })
       .append(this.context.iconProvider.renderIcon($$, 'person-link'))
 
-    if(node.global) {
-      el.append(resourceLink)
-    }
+    // if(node.global) {
+    //   el.append(resourceLink)
+    // }
 
     el.append(
       $$('div').addClass('se-title').append(node.name),

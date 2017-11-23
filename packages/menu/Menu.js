@@ -38,7 +38,7 @@ class Menu extends Component {
   }
 
   renderMenu($$) {
-    let items = [{id: 'archive', name: 'архив', url: '/'}, {id: 'collections', name: 'коллекции', url: '/'}]
+    let items = [{id: 'persons', name: 'имена', url: '/persons'}, {id: 'archive', name: 'архив', url: '/'}]
     let el = $$('ul').addClass('se-menu')
 
     items.forEach(item => {

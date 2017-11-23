@@ -1,0 +1,117 @@
+.sc-persons-index {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-attachment: fixed;
+  background-image: url(/assets/cover.jpg);
+}
+
+.sc-persons-index .se-persons-pane {
+  margin: 0px auto 0px;
+  width: 960px;
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  padding: 10px;
+}
+
+.sc-persons-index .se-loader {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.sc-persons-index .sc-grid {
+  border: 1px solid #E0E4E4;
+  border-radius: 3px;
+  padding-bottom: 0px;
+}
+
+.sc-persons-index .se-total {
+  font-size: 13px;
+  padding-top: 10px;
+  float: right;
+  cursor: pointer;
+}
+
+.sc-persons-index .se-total.sm-active {
+  border-bottom: 1px dashed rgba(0,0,0,0.75);
+}
+
+.sc-persons-index .se-letter-filter {
+  padding: 10px 0px;
+}
+
+.sc-persons-index .se-letter-item {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-right: 3px;
+  cursor: pointer;
+}
+
+.sc-persons-index .se-letter-item.sm-active {
+  color: inherit;
+  border-bottom: 1px dashed rgba(0,0,0,0.75);
+}
+
+.sc-persons-index .se-letter-item .se-letter-counter {
+  margin-left: 1px;
+  font-size: 9px;
+  color: #808080;
+}
+
+.sc-person-item {
+  padding: 15px 10px;
+  margin: 0px 10px;
+  font-size: 13px;
+  margin-right: 3px;
+}
+
+.sc-person-item.se-row:hover {
+  background: inherit;
+}
+
+.sc-person-item .se-name {
+  font-size: 18px;
+  padding-bottom: 5px;
+}
+
+.sc-person-item .se-description {
+  font-size: 1.6em;
+}
+
+.sc-person-item .se-description p {
+  margin-bottom: 0.3em;
+}
+
+.sc-person-item .se-stats {
+  padding-top: 10px;
+  font-style: italic;
+}
+
+.sc-person-item .se-documents {
+  border: none;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  height: auto;
+}
+
+.sc-person-item .se-documents .sc-document-item {
+  cursor: default;
+}
+
+.sc-person-item .se-documents .sc-document-item:last-child {
+  border: none;
+}
+
+.sc-person-item .se-documents .sc-document-item:hover {
+  background: inherit;
+}
+
+.sc-person-item .se-documents .sc-pager .sc-button:hover {
+  width: 100%;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.4);
+}

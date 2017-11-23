@@ -121,6 +121,10 @@
   left: -30px;
 }
 
+.sc-reader .se-main-section .sc-text-property .sc-comment {
+  background: transparent;
+}
+
 .sc-reader .se-main-section .sc-scrollbar {
   box-shadow: inset 4px 0 4px 0 rgba(25,25,25,0.04);
 }
