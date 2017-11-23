@@ -147,6 +147,7 @@ class ResourceEngine extends ArchivistResourceEngine {
       FROM entities
       WHERE "entityType" = 'person'
       AND entities.data->'global' = 'true' ${letterCondition}
+      AND (SELECT COUNT(*) FROM documents WHERE "references" ? "entityId" AND meta->>'state' = 'published') > 0
     `
 
     let query = `
