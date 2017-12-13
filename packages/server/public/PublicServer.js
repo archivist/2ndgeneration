@@ -1,5 +1,6 @@
 let extend = require('lodash/extend')
 let isEmpty = require('lodash/isEmpty')
+let groupBy = require('lodash/groupBy')
 let union = require('lodash/union')
 
 /*
@@ -16,6 +17,7 @@ class PublicServer {
   }
 
   bind(app) {
+    app.get(this.path + '/latest', this._getLatestData.bind(this))
     app.get(this.path + '/respondents', this._listRespondents.bind(this))
     app.get(this.path + '/respondents/:id', this._getRespondentData.bind(this))
   }
@@ -157,6 +159,109 @@ class PublicServer {
     })
   }
 
+  /*
+    Latest
+  */
+  _getLatestData(req, res, next) {
+    let data = {
+      topics: {},
+      stories: {},
+      archive: {}
+    }
+    Promise.all([
+      this._getTopicsList(),
+      this._getLatestStories(),
+      this._getLatestArchive()
+    ]).then(all => {
+      const topics = all[0]
+      const stories = all[1]
+      const archive = all[2]
+      if(topics) {
+        topics.forEach(topic => {
+          data.topics[topic.entityId] = {
+            id: topic.id,
+            name: topic.name
+          }
+        })
+      }
+      if(stories) {
+        data.stories = groupBy(stories.records, 'subject')
+      }
+      if(archive) {
+        let files = []
+
+        archive.records.forEach(file => {
+          files.push({
+            id: file.entityId,
+            title: file.title,
+            caption: file.abstract,
+            gallery: file.gallery,
+            file: file.file,
+            subject: JSON.parse(file.subject)[0],
+            person: file.respondent,
+            person_name: file.name,
+          })
+        })
+
+        data.archive = groupBy(files, 'subject')
+      }
+
+      let result = []
+      topics.forEach(topic => {
+        result.push({
+          topic: topic.name,
+          stories: data.stories[topic.entityId],
+          archive: data.archive[topic.entityId]
+        })
+      })
+
+      res.json(result)
+    }).catch(function(err) {
+      return next(err)
+    })
+  }
+
+  _getTopicsList() {
+    return this.engine.getResourcesTree('subject')
+  }
+
+  _getLatestStories() {
+    const filters = {
+      entityType: 'story',
+      //'published': true
+    }
+
+    const options = {
+      columns: ['"entityId"', 'name AS title', 'data->>\'annotation\' AS abstract', 'data->>\'subject\' AS subject', 'data->>\'media\' AS source', 'data->>\'cover\' AS cover'],
+      order: 'created',
+      limit: 30
+    }
+
+    return this.engine.listEntities({
+      filters: JSON.stringify(filters),
+      options: JSON.stringify(options)
+    }).then(archive => {
+      return archive
+    })
+  }
+
+  _getLatestArchive() {
+    const filters = {
+      entityType: 'file'
+    }
+    const options = {
+      columns: ['"entityId"', 'name AS title', 'data->>\'description\' AS caption', 'data->>\'gallery\' AS gallery', 'data->>\'file\' AS file', 'data->>\'subject\' AS subject', 'data->>\'respondent\' AS respondent', '(SELECT data->>\'photo\' FROM entities WHERE "entityId" = \'0dfd50c806c7cc5b646556c651ebf3ab\')'],
+      order: 'cast(data->>\'position\' as integer)',
+      limit: 30
+    }
+
+    return this.engine.listEntities({
+      filters: JSON.stringify(filters),
+      options: JSON.stringify(options)
+    }).then(archive => {
+      return archive
+    })
+  }
 
   /*
     Search entities

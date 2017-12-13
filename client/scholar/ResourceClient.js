@@ -15,6 +15,12 @@ class ResourceClient {
     request('GET', '/api/public/respondents?options=' + optionsRequest, null, cb)
   }
 
+  listLatest(options, cb) {
+    let optionsRequest = encodeURIComponent(JSON.stringify(options))
+    //request('GET', '/api/entities/respondents?options=' + optionsRequest, null, cb)
+    request('GET', '/api/public/latest?options=' + optionsRequest, null, cb)
+  }
+
   getRespondentData(personId, cb) {
     request('GET', '/api/public/respondents/' + personId, null, cb)
   }

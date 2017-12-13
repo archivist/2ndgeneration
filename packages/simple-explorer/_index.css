@@ -53,3 +53,13 @@
   font-size: 0.8em;
   line-height: 1.5em;
 }
+
+.sc-explorer .se-latest {
+  width: calc(70vw - 6em);
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-size: cover;
+  margin: 2em;
+}
