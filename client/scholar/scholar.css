@@ -57,3 +57,7 @@ button:focus {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
+
+.se-latest {
+  display: none;
+}
