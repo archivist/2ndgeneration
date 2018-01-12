@@ -41,7 +41,8 @@
   right: 0;
   margin: auto;
   font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Arial", sans-serif;
-  padding: 40px;
+  padding: 0px 40px 40px;
+  margin-top: 40px;
 }
 
 .sc-reader .sc-text-property {

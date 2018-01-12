@@ -140,11 +140,11 @@ class Reader extends ProseEditor {
 
     layout.append(
       $$(Brackets).ref('brackets'),
-      $$(TextPropertyEditor, {
-        name: 'title',
-        path: ["meta", "title"],
-        disabled: true
-      }).addClass('se-title'),
+      // $$(TextPropertyEditor, {
+      //   name: 'title',
+      //   path: ["meta", "title"],
+      //   disabled: true
+      // }).addClass('se-title'),
       $$(ContainerEditor, {
         disabled: true,
         editorSession: this.editorSession,
